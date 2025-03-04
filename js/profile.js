@@ -7,11 +7,11 @@ window.addEventListener('DOMContentLoaded', getUserOrders);
 
 btnLogout.addEventListener('click', logout);
 btnMenuLogo.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/home.html';
+    window.location.href='../home.html';
 });
 
 btnCart.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/cart.html';
+    window.location.href='../cart.html';
 });
 
 //név módosítása
@@ -117,7 +117,7 @@ async function logout(){
 
     if(res.ok){
         alert(data.message);
-        window.location.href='../webshop_frontend/index.html';
+        window.location.href='../index.html';
     }else{
         alert('Hiba a kijelentkezéskor!')
     }

@@ -5,20 +5,20 @@ const btnAddToCart = document.getElementsByClassName('add-to-cart-btn')[0];
 const btnMenuLogo = document.getElementsByClassName('menu-logo')[0];
 
 btnLogout.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/index.html';
+    window.location.href='../index.html';
 });
 
 
 btnProfile.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/profile.html';
+    window.location.href='../profile.html';
 });
 
 btnCart.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/cart.html';
+    window.location.href='../cart.html';
 });
 
 btnMenuLogo.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/home.html';
+    window.location.href='../home.html';
 });
 
 window.addEventListener('DOMContentLoaded', getProduct)
@@ -189,7 +189,7 @@ async function logout(){
 
     if(res.ok){
         alert(data.message);
-        window.location.href='../webshop_frontend/index.html';
+        window.location.href='../index.html';
     }else{
         alert('Hiba a kijelentkezéskor!')
     }

@@ -3,9 +3,9 @@ const btnReg =document.getElementsByClassName ('reg')[0];
 
 
 btnLogin.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/login.html';
+    window.location.href='../login.html';
 });
 
 btnReg.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/registration.html';
+    window.location.href='../registration.html';
 });

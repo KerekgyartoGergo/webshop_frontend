@@ -7,15 +7,15 @@ const btnCart =document.getElementsByClassName ('icon-cart')[0];
 btnLogout.addEventListener('click', logout);
 
 btnProfile.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/profile.html';
+    window.location.href='../profile.html';
 });
 
 btnMenuLogo.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/home.html';
+    window.location.href='../home.html';
 });
 
 btnCart.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/cart.html';
+    window.location.href='../cart.html';
 });
 
 
@@ -41,7 +41,7 @@ async function logout(){
 
     if(res.ok){
         alert(data.message);
-        window.location.href='../webshop_frontend/index.html';
+        window.location.href='../index.html';
     }else{
         alert('Hiba a kijelentkezéskor!')
     }

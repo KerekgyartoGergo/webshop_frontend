@@ -18,7 +18,7 @@ async function logout(){
 
     if(res.ok){
         alert(data.message);
-        window.location.href='../webshop_frontend/index.html';
+        window.location.href='../index.html';
     }else{
         alert('Hiba a kijelentkezéskor!')
     }

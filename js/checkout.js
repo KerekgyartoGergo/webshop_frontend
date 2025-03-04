@@ -12,15 +12,15 @@ window.addEventListener('DOMContentLoaded', getCartTotal);
 
 
 btnMenuLogo.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/home.html';
+    window.location.href='../home.html';
 });
 
 btnProfile.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/profile.html';
+    window.location.href='../profile.html';
 });
 
 btnCart.addEventListener('click', () => {
-    window.location.href = '../webshop_frontend/cart.html';
+    window.location.href = '../cart.html';
 });
 
 
@@ -34,7 +34,7 @@ async function logout() {
 
     if (res.ok) {
         alert(data.message);
-        window.location.href = '../webshop_frontend/index.html';
+        window.location.href = '../index.html';
     } else {
         alert('Hiba a kijelentkezéskor!')
     }
@@ -194,7 +194,7 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
         } else {
             alert('✅ Rendelés sikeresen leadva!');
             // Opcionálisan átirányíthatjuk a felhasználót a rendelés részletező oldalra
-             window.location.href = '../webshop_frontend/home.html';
+             window.location.href = '../home.html';
         }
     })
     .catch(error => {

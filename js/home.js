@@ -21,14 +21,14 @@ katElements.forEach(kat => {
 
 
 btnProfile.addEventListener('click', () => {
-    window.location.href = '../webshop_frontend/profile.html';
+    window.location.href = '../profile.html';
 })
 
 btnLogout.addEventListener('click', logout);
 
 
 btnCart.addEventListener('click', () => {
-    window.location.href = '../webshop_frontend/cart.html';
+    window.location.href = '../cart.html';
 });
 
 
@@ -70,7 +70,7 @@ function renderProducts(products) {
         cardBodyDiv.classList.add('card-body');
         cardBodyDiv.addEventListener('click', () => {
             // Navigálás a teszt.html oldalra a termék id-jával
-            window.location.href = `../webshop_frontend/teszt.html?product_id=${product.product_id}`;
+            window.location.href = `../teszt.html?product_id=${product.product_id}`;
         });
 
         const cardPic = document.createElement('div');
@@ -203,7 +203,7 @@ async function logout() {
 
     if (res.ok) {
         alert(data.message);
-        window.location.href = '../webshop_frontend/index.html';
+        window.location.href = '../index.html';
     } else {
         alert('Hiba a kijelentkezéskor!')
     }

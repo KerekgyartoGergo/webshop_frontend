@@ -40,7 +40,7 @@ async function register(){
 
     if (res.ok) {
         alert(data.message);
-        window.location.href ='../webshop_frontend/login.html';
+        window.location.href ='../login.html';
     } else if(data.errors){
         let errorMessage ='';
         for (let i = 0; i < data.errors.length; i++){

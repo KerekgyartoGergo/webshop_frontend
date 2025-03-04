@@ -40,9 +40,9 @@ async function login() {
         
         // Ellenőrizzük a felhasználó szerepkörét
         if (data.role === 'admin') {
-            window.location.href = '../webshop_frontend/admin.html';
+            window.location.href = '../admin.html';
         } else {
-            window.location.href = '../webshop_frontend/home.html';
+            window.location.href = '../home.html';
         }
     } else if (data.errors) {
         let errorMessage = '';

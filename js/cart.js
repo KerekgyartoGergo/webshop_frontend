@@ -11,15 +11,15 @@ btnLogout.addEventListener('click', logout);
 
 
 btnMenuLogo.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/home.html';
+    window.location.href='../home.html';
 });
 
 btnFolytatas.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/checkout.html';
+    window.location.href='../checkout.html';
 });
 
 btnProfile.addEventListener('click', ()=>{
-    window.location.href='../webshop_frontend/profile.html';
+    window.location.href='../profile.html';
 });
 
 
@@ -197,7 +197,7 @@ async function logout(){
 
     if(res.ok){
         alert(data.message);
-        window.location.href='../webshop_frontend/index.html';
+        window.location.href='../index.html';
     }else{
         alert('Hiba a kijelentkezéskor!')
     }
