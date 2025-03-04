@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <header>
+        <div class="menu-logo" title="kezdőlap">
+            <span class="menu-logo-arany">Admin </span>Panel
+        </div>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <nav>
+            <a href="#" class="icon-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+        </nav>
+    </header>
+
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close2">&times;</span>
+            <h2 >Új termék hozzáadása</h2>
+            <form id="addForm">
+                <label for="add_name">Név:</label><br>
+                <input type="text" id="add_name" name="name" ><br><br>
+
+                <label for="add_description">Leírás:</label><br>
+                <input type="text" id="add_description" name="description" ><br><br>
+    
+                <label for="add_price">Ár:</label><br>
+                <input type="number" id="add_price" name="price" ><br><br>
+    
+                <label for="add_stock">Készlet:</label><br>
+                <input type="number" id="add_stock" name="stock" ><br><br>
+    
+                <label for="add_category_id">Kategória ID:</label><br>
+                <input type="number" id="add_category_id" name="category_id" ><br><br>
+    
+                <label for="add_pic">Kép:</label><br>
+                <input type="file" id="add_pic" name="pic" ><br><br>
+    
+                <button type="submit">Hozzáadás</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Termék szerkesztési modal -->
+<div id="editModal5" class="modal">
+    <div class="modal-content">
+        <span class="close5">&times;</span>
+        <h2 >termék adatok szerkesztése</h2>
+        <form id="editForm2">
+            <label for="Jelátvitel">Jelátvitel:</label>
+            <input type="text" id="Jelátvitel" name="Jelátvitel"><br><br>
+            
+            <label for="Max_működési_idő">Max. működési idő:</label>
+            <input type="text" id="Max_működési_idő" name="Max_működési_idő"><br><br>
+            
+            <label for="Hordhatósági_változatok">Hordhatósági változatok:</label>
+            <input type="text" id="Hordhatósági_változatok" name="Hordhatósági_változatok"><br><br>
+            
+            <label for="Termék_típusa">Termék típusa:</label>
+            <input type="text" id="Termék_típusa" name="Termék_típusa"><br><br>
+            
+            <label for="Kivitel">Kivitel:</label>
+            <input type="text" id="Kivitel" name="Kivitel"><br><br>
+            
+            <label for="Bluetooth_verzió">Bluetooth verzió:</label>
+            <input type="text" id="Bluetooth_verzió" name="Bluetooth_verzió"><br><br>
+            
+            <label for="Hangszóró_meghajtók">Hangszóró meghajtók:</label>
+            <input type="text" id="Hangszóró_meghajtók" name="Hangszóró_meghajtók"><br><br>
+            
+            <label for="Szín">Szín:</label>
+            <input type="text" id="Szín" name="Szín"><br><br>
+            
+            <label for="Csatlakozók">Csatlakozók:</label>
+            <input type="text" id="Csatlakozók" name="Csatlakozók"><br><br>
+            
+            <label for="Bluetooth">Bluetooth:</label>
+            <input type="text" id="Bluetooth" name="Bluetooth"><br><br>
+            
+            <label for="Frekvenciaátvitel">Frekvenciaátvitel:</label>
+            <input type="text" id="Frekvenciaátvitel" name="Frekvenciaátvitel"><br><br>
+            
+            <label for="Érzékenység">Érzékenység:</label>
+            <input type="text" id="Érzékenység" name="Érzékenység"><br><br>
+            
+            <button type="submit">Frissítés</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+    <div id="addCategorieModal" class="modal">
+        <div class="modal-content">
+            <span class="close3">&times;</span>
+            <h2 >Új kategória hozzáadása</h2>
+            <form id="addCategorrieForm">
+                <label for="add_categorie_name">Név:</label><br>
+                <input type="text" id="add_categorie_name" name="name" ><br><br>
+
+                <label for="add_categorie_description">Leírás:</label><br>
+                <input type="text" id="add_categorie_description" name="description" ><br><br>
+    
+                <button type="submit">Hozzáadás</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="editCategorieModal" class="modal">
+        <div class="modal-content">
+            <span class="close4">&times;</span>
+            <h2 >kategória szerkesztése</h2>
+            <form id="editCategorrieForm">
+                <label style="display: none;" id="cat_id"></label>
+                <label for="edit_categorie_name">Név:</label><br>
+                <input type="text" id="edit_categorie_name" name="name" ><br><br>
+
+                <label for="edit_categorie_description">Leírás:</label><br>
+                <input type="text" id="edit_categorie_description" name="description" ><br><br>
+    
+                <button type="submit">Frissítés</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Termék szerkesztése</h2>
+
+            <form id="editForm">
+                <label for="name">Név:</label><br>
+                <input type="text" id="name" name="name"><br><br>
+                <label for="description">Leírás:</label><br>
+                <input type="text" id="description" name="description"><br><br>
+                <label for="price">Ár:</label><br>
+                <input type="number" id="price" name="price"><br><br>
+                <label for="stock">Készlet:</label><br>
+                <input type="number" id="stock" name="stock"><br><br>
+                <label for="category_id">Kategória ID:</label><br>
+                <input type="number" id="category_id" name="category_id"><br><br>
+                <label for="pic">Kép:</label><br>
+                <input type="file" id="pic" name="pic"><br><br>
+                <input type="hidden" id="product_id" name="product_id">
+                <button type="submit">Frissítés</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <div class="menu">
+            <a href="#users">Felhasználók kezelése</a>
+            <a href="#products">Termékek kezelése</a>
+            <a href="#categories">ketegóriák kezelése</a>
+            <a href="adminOrders.html">rendelések kezelése</a>
+        </div>
+
+        <main class="content">
+            <section id="users" class="admin-section">
+                <h2>Felhasználók kezelése</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Név</th>
+                            <th>Email</th>
+                            <th>Szerepkör</th>
+                            <th>Műveletek</th>
+                        </tr>
+                    </thead>
+                    <tbody class="usersList">
+                        <!-- Felhasználói lista dinamikusan töltődik be -->
+                    </tbody>
+                </table>
+            </section>
+
+            
+
+            <section id="products" class="admin-section">
+                <h2>Termékek kezelése</h2>
+                <button class="add">Új termék hozzáadása</button>
+                <button class="add2">Új kategoria hozzáadása</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Név</th>
+                            <th>Ár</th>
+                            <th>Leírás</th>
+                            <th>stock</th>
+                            <th>kategoria</th>
+                            <th>pic</th>
+                            <th>Műveletek</th>
+                        </tr>
+                    </thead>
+                    <tbody class="productsList">
+                        <!-- Termékek lista dinamikusan töltődik be -->
+                    </tbody>
+                </table>
+            </section>
+
+
+            <section id="categories" class="admin-section">
+                <h2>Kategóriák kezelése</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Név</th>
+                            <th>Leírás</th>
+                            <th>Műveletek</th>
+                        </tr>
+                    </thead>
+                    <tbody class="categoriesList">
+                        <!-- Kategória lista dinamikusan töltődik be -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 class="footer-column-title">Szolgáltatások</h3>
+                <ul>
+                    <li><a href="link1.html">30 napos termékvisszaköldés</a></li>
+                    <li><a href="link2.html">Garancia és szerviz</a></li>
+                    <li><a href="link3.html">Kiterjesztett garancia</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-column-title">Rendelés és szállítás</h3>
+                <ul>
+                    <li><a href="link4.html">Fizetési módok</a></li>
+                    <li><a href="link5.html">Szállítással kapcsolatos részletek</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 class="footer-column-title">Ügyfélszolgálat</h3>
+                <ul>
+                    <li><a href="link7.html">Elérhetőségek</a></li>
+                    <li><a href="link8.html">Panaszkezelés</a></li>
+                    <li><a href="link9.html">Gyakran ismételt kérdések</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Minden jog fenntartva.</p>
+        </div>
+    </footer>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

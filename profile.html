@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheShop</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body id="header">
+    <header>
+        <div class="menu-logo" title="Jó vásárlást!">
+            <span class="menu-logo-arany">Dunder</span>Mifflin
+        </div>
+        
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <label for="menu-toggle" class="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+            <a href="#header" class="icon-cart">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </a>
+            <a href="#" class="icon-user">
+                <i class="fa-regular fa-user"></i>
+            </a>
+            <a href="#" class="icon-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Név módosítása</h2>
+            <input type="text" id="nameInput" placeholder="Új név">
+            <button class="mentes" id="saveName">Mentés</button>
+        </div>
+        <div class="card">
+            <h2>Jelszó módosítása</h2>
+            <input type="password" id="passwordInput" placeholder="Új jelszó">
+            <input type="password" id="confirmPasswordInput" placeholder="Jelszó megerősítése">
+            <button class="mentes" id="savePassword">Mentés</button>
+        </div>
+        <h2 style="margin-bottom: 2rem; color:white">Rendeléseid</h2>
+
+        <div class="ordersList">
+
+        </div>
+
+    </main>
+
+    <footer>
+        Ügyfélfiók a Dunder Mifflin-nál!
+    </footer>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

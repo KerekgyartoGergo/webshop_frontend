@@ -1,0 +1,366 @@
+/* alap beállítások */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #383838;
+}
+
+input{
+    background-color: #292828;
+    color: white;
+}
+
+#header {
+    animation: loaderAnimation 1.5s ease-in-out;
+}
+
+/* lábléc */
+footer {
+    background-color: #292929;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    color: white;
+}
+
+/* --- a fejléc a menüvel --- */
+header {
+    background-color: #313131;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center; /* függőleges igazítás */
+    justify-content: space-between; /* vízszintes igazítás */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-logo, .menu-logo-arany {
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    user-select: none;
+    padding: none;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    cursor: pointer;
+}
+
+.menu-logo-arany {
+    color: #A59568;
+}
+
+/* menü alapállapotban */
+nav {
+    display: flex;
+    gap: 2rem;
+    font-size: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+.icon-cart,
+.icon-logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: ease 500ms;
+}
+
+.icon-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: ease 500ms;
+    background-color: #555454;
+}
+
+.icon-logout {
+    color: white;
+}
+
+.icon-user:hover,
+.icon-cart:hover {
+    transform: scale(1.1);
+    background-color: #464545;
+}
+
+.icon-logout:hover {
+    transform: scale(1.1);
+    background-color: red;
+}
+
+/* hamburger menü */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    background-color: #292828;
+}
+
+.hamburger-menu span {
+    display: block;
+    height: 4px;
+    background-color: #A59568;
+    border-radius: 2px;
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.menu-toggle:checked~nav {
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger-menu {
+        display: flex;
+    }
+
+    nav {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        background-color: #292929;
+        padding: 10px;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        font-size: 1.5rem;
+        display: none;
+    }
+}
+
+/* --- tartalom --- */
+main {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* kártya stílusok */
+.card {
+    background-color: #313131;
+    width: 1000px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    margin-bottom: 10px;
+    padding: 20px;
+    margin-bottom: 60px;
+}
+
+
+.card input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+}
+
+.card .mentes {
+    background-color: #a59568;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: ease 500ms;
+}
+
+.card .mentes:hover {
+    transform: scale(1.05);
+}
+
+/* név és jelszó módosítása gombok */
+.edit-button {
+    background-color: #a59568;
+    width: 500px;
+    padding: 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease 500ms;
+    color: white;
+}
+
+.edit-button:hover {
+    transform: scale(1.01);
+}
+
+.edit-button button {
+    font-size: 1.5rem;
+    color: white;
+    background-color: inherit;
+    border: none;
+    cursor: inherit;
+}
+
+
+@keyframes loaderAnimation {
+    0% { opacity: 0; transform: translatey(30px); }
+    100% { opacity: 1; transform: translatey(0); }
+}
+
+
+@media screen and (max-width: 430px){
+    .card{
+        width: 380px;
+
+    }
+    .focim{
+        font-size: 4rem;
+        font-weight: 600;
+    }
+}
+
+
+
+
+
+
+/* Rendelések kártyája */
+.order-card {
+    background-color: #313131;
+    width: 1000px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    color: white;
+    margin-bottom: 5rem;
+}
+
+/* Rendelés adatainak megjelenítése */
+.order-card .order-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Termékek táblázat stílusa */
+.order-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-card th, .order-card td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #666;
+}
+
+.order-card th {
+    background-color: #444;
+    font-size: 1.1rem;
+}
+
+.order-card td {
+    background-color: #2e2e2e;
+}
+
+.order-card img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Státusz módosító legördülő menü */
+.select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.select select {
+    background-color: #444;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: ease 300ms;
+}
+
+.select select:hover {
+    background-color: #666;
+}
+
+/* Hover effektusok a legördülő menüön */
+.select select:focus {
+    outline: none;
+    border-color: #a59568;
+}
+
+/* Kártyán található mentés gomb stílusa */
+.card .mentes {
+    background-color: #a59568;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: ease 500ms;
+}
+
+.card .mentes:hover {
+    transform: scale(1.05);
+}
+
+/* Gombok általános stílusa */
+button {
+    font-size: 1rem;
+    color: white;
+    background-color: #a59568;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: ease 500ms;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
