@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', getProducts)
 
 katElements.forEach(kat => {
     kat.addEventListener('click', () => {
-        window.location.href = '../webshop_frontend/kategoria.html';
+        window.location.href = '../kategoria.html';
     });
 });
 
