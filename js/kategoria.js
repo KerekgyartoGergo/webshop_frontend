@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function logout(){
-    const res =await fetch('http://127.0.0.1:3000/api/logout',{
+    const res =await fetch('/api/logout',{
         method:'POST',
         credentials: 'include'
     });

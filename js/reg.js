@@ -26,7 +26,7 @@ async function register(){
     }
 
 
-    const res =await fetch('http://127.0.0.1:3000/api/register', {
+    const res =await fetch('/api/register', {
         method: 'POST',
         headers:{
             'content-type': 'application/json'

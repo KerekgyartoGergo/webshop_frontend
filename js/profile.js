@@ -25,7 +25,7 @@ document.getElementById("saveName").addEventListener("click", function() {
     }
 
     // POST kérés a backend felé a név módosításához
-    fetch('http://127.0.0.1:3000/api/editProfileName', {
+    fetch('/api/editProfileName', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ document.getElementById('savePassword').addEventListener('click', function() {
 
     const data = { psw: password };
 
-    fetch('http://127.0.0.1:3000/api/editProfilePsw', {
+    fetch('/api/editProfilePsw', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ document.getElementById('savePassword').addEventListener('click', function() {
 
 
 async function logout(){
-    const res =await fetch('http://127.0.0.1:3000/api/logout',{
+    const res =await fetch('/api/logout',{
         method:'POST',
         credentials: 'include'
     });
@@ -130,7 +130,7 @@ async function logout(){
 
 async function getUserOrders() {
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/my-orders', {
+        const res = await fetch('/api/my-orders', {
             method: 'GET',
             credentials: 'include'
         });
@@ -213,7 +213,7 @@ function renderOrders(orders) {
             const productRow = document.createElement('tr');
             productRow.innerHTML = `
                 <td>${product.name}</td>
-                <td><img src="http://127.0.0.1:3000/uploads/${product.pic}" alt="${product.name}" width="50"></td>
+                <td><img src="/uploads/${product.pic}" alt="${product.name}" width="50"></td>
                 <td>${product.quantity}</td>
                 <td>${product.price} Ft</td>
             `;
@@ -224,7 +224,7 @@ function renderOrders(orders) {
 
         // Kérjük le a rendelés végösszegét az API-ból
 
-fetch(`http://127.0.0.1:3000/api/getOrderTotal?order_id=${orderId}`, {
+fetch(`/api/getOrderTotal?order_id=${orderId}`, {
     method: 'GET',
     credentials: 'include'
 })

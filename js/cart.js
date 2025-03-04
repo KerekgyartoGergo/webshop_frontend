@@ -28,7 +28,7 @@ btnProfile.addEventListener('click', ()=>{
 
 
 async function getCartItems() {
-    const res = await fetch('http://127.0.0.1:3000/api/getCartItems', {
+    const res = await fetch('/api/getCartItems', {
         method: 'GET',
         credentials: 'include'
     });
@@ -49,7 +49,7 @@ function renderCartItems(cartItems) {
 
         // Termékkép
         const cardImg = document.createElement('img');
-        cardImg.src = `http://127.0.0.1:3000/uploads/${item.product_image}`;
+        cardImg.src = `/uploads/${item.product_image}`;
         cardImg.alt = 'Termék Képe';
         cardImg.classList.add('card-image');
 
@@ -103,7 +103,7 @@ function renderCartItems(cartItems) {
 
 
 function updateCartItem(productId, newQuantity) {
-    fetch('http://127.0.0.1:3000/api/updateCart/', {
+    fetch('/api/updateCart/', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ function updateCartItem(productId, newQuantity) {
 async function deleteItemFromCart(productId) {
     if (confirm('Biztosan törölni akarod a terméket a kosárból?')) {
         try {
-            const res = await fetch('http://127.0.0.1:3000/api/deleteCart', {
+            const res = await fetch('/api/deleteCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function logout(){
-    const res =await fetch('http://127.0.0.1:3000/api/logout',{
+    const res =await fetch('/api/logout',{
         method:'POST',
         credentials: 'include'
     });
@@ -214,7 +214,7 @@ async function logout(){
 async function deleteItemFromCart(productId) {
     if (confirm('Biztosan törölni akarod a terméket a kosárból?')) {
         try {
-            const res = await fetch('http://127.0.0.1:3000/api/deleteCart', {
+            const res = await fetch('/api/deleteCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',                },
@@ -258,7 +258,7 @@ async function deleteItemFromCart(productId) {
 
 async function getCartTotal() {
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/getCartTotal', {
+        const res = await fetch('/api/getCartTotal', {
             method: 'GET',
             credentials: 'include'  // Az autentikációhoz szükséges sütik (cookies) átadása
         });

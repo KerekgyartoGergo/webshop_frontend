@@ -25,7 +25,7 @@ btnCart.addEventListener('click', () => {
 
 
 async function logout() {
-    const res = await fetch('http://127.0.0.1:3000/api/logout', {
+    const res = await fetch('/api/logout', {
         method: 'POST',
         credentials: 'include'
     });
@@ -41,7 +41,7 @@ async function logout() {
 }
   
 async function getCartItems() {
-    const res = await fetch('http://127.0.0.1:3000/api/getCartItems', {
+    const res = await fetch('/api/getCartItems', {
         method: 'GET',
         credentials: 'include'
     });
@@ -64,7 +64,7 @@ function renderCartItems(cartItems) {
 
         // Termékkép
         const productImg = document.createElement('img');
-        productImg.src = `http://127.0.0.1:3000/uploads/${item.product_image}`;
+        productImg.src = `/uploads/${item.product_image}`;
         productImg.alt = `${item.description}`;
         productImg.classList.add('product-image');
 
@@ -103,7 +103,7 @@ function renderCartItems(cartItems) {
 
 async function getCartTotal() {
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/getCartTotal', {
+        const res = await fetch('/api/getCartTotal', {
             method: 'GET',
             credentials: 'include'  // Az autentikációhoz szükséges sütik (cookies) átadása
         });
@@ -168,7 +168,7 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
     }
 
     // POST kérés küldése a backend API-hoz
-    fetch('http://127.0.0.1:3000/api/addOrderWithItems', {
+    fetch('/api/addOrderWithItems', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

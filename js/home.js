@@ -36,7 +36,7 @@ btnCart.addEventListener('click', () => {
 
 
 async function getProducts() {
-    const res = await fetch('http://127.0.0.1:3000/api/products', {
+    const res = await fetch('/api/products', {
         method: 'GET',
         credentials: 'include'
     })
@@ -77,7 +77,7 @@ function renderProducts(products) {
         cardPic.classList.add('pic-div');
 
         const cardBodyImg = document.createElement('img');
-        cardBodyImg.src = `http://127.0.0.1:3000/uploads/${product.pic}`;
+        cardBodyImg.src = `/uploads/${product.pic}`;
 
         cardPic.append(cardBodyImg);
         cardBodyDiv.append(cardPic);
@@ -118,7 +118,7 @@ function renderProducts(products) {
 //kategoriak
 async function getCategories() {
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/categories', {
+        const res = await fetch('/api/categories', {
             method: 'GET',
             credentials: 'include'
         });
@@ -160,7 +160,7 @@ function renderCategories(categories) {
 //termék kosárhoz adása
 async function addToCart(product_id, quantity = 1) {
     try {
-        const response = await fetch('http://127.0.0.1:3000/api/addCart/', {
+        const response = await fetch('/api/addCart/', {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -194,7 +194,7 @@ async function addToCart(product_id, quantity = 1) {
 
 
 async function logout() {
-    const res = await fetch('http://127.0.0.1:3000/api/logout', {
+    const res = await fetch('/api/logout', {
         method: 'POST',
         credentials: 'include'
     });
@@ -228,7 +228,7 @@ txttxt.addEventListener('input', () => {
 async function searchingProduct(searchQuery) {
     console.log(searchQuery);
 
-    const res = await fetch(`http://127.0.0.1:3000/api/search/${searchQuery}`, {
+    const res = await fetch(`/api/search/${searchQuery}`, {
         method: 'GET',
         headers: {
             'content-type': 'application/json'

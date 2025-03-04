@@ -9,7 +9,7 @@ const btnLogout =document.getElementsByClassName ('icon-logout')[0];
 btnLogout.addEventListener('click', logout);
 
 async function logout(){
-    const res =await fetch('http://127.0.0.1:3000/api/logout',{
+    const res =await fetch('/api/logout',{
         method:'POST',
         credentials: 'include'
     });
@@ -30,7 +30,7 @@ async function logout(){
 
 
 async function getUsers () {
-    const res = await fetch('http://127.0.0.1:3000/api/users', {
+    const res = await fetch('/api/users', {
         method: 'GET',
         credentials: 'include'
     })
@@ -109,7 +109,7 @@ function renderUsers(users) {
 async function deleteUser(userId) {
     if (confirm('Biztosan törölni akarod a felhasználót?')) {
         try {
-            const res = await fetch('http://127.0.0.1:3000/api/deleteUser', {
+            const res = await fetch('/api/deleteUser', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ async function deleteUser(userId) {
 
 async function editUser(userId) {
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/updateUserRole', {
+        const res = await fetch('/api/updateUserRole', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -201,7 +201,7 @@ async function editUser(userId) {
 
 //termékek lekérése
 async function getProducts () {
-    const res = await fetch('http://127.0.0.1:3000/api/products', {
+    const res = await fetch('/api/products', {
         method: 'GET',
         credentials: 'include'
     })
@@ -254,7 +254,7 @@ function renderProducts(products) {
         // Termék képe
         const imageCell = document.createElement('td');
         const image = document.createElement('img');
-        image.src = `http://127.0.0.1:3000/uploads/${product.pic}`;
+        image.src = `/uploads/${product.pic}`;
         image.alt = product.name;
         imageCell.appendChild(image);
         row.appendChild(imageCell);
@@ -304,7 +304,7 @@ tbody.appendChild(row);
 async function deleteItem(productId) {
     if (confirm('Biztosan törölni akarod a terméket?')) {
         try {
-            const res = await fetch('http://127.0.0.1:3000/api/deleteProduct/' + productId, {
+            const res = await fetch('/api/deleteProduct/' + productId, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -359,7 +359,7 @@ function openEditModal(product) {
     document.getElementById('description').value = product.description || '';
     document.getElementById('stock').value = product.stock || '';
     document.getElementById('category_id').value = product.category_id || '';
-    document.getElementById('pic').src = `http://127.0.0.1:3000/uploads/${product.pic}`;
+    document.getElementById('pic').src = `/uploads/${product.pic}`;
     
     // Termék ID mentése egy változóba
     currentProductId = product.product_id;
@@ -374,7 +374,7 @@ document.getElementById("editForm").addEventListener("submit", async function(ev
     formData.append('id', currentProductId); // ID hozzáadása automatikusan
 
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/updateItem', {
+        const res = await fetch('/api/updateItem', {
             method: 'POST',
             body: formData,
             credentials: 'include' // Hitelesítési adatok automatikus küldése
@@ -462,7 +462,7 @@ document.getElementById("editForm2").addEventListener("submit", async function(e
     try {
         console.log("Küldött adatok:", formData);
 
-        const res = await fetch('http://127.0.0.1:3000/api/updateItemInfo', {
+        const res = await fetch('/api/updateItemInfo', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formData),
@@ -555,7 +555,7 @@ document.getElementById("addCategorrieForm").addEventListener("submit", async fu
     };
 
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/addCategory', {
+        const res = await fetch('/api/addCategory', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -610,7 +610,7 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
     formData.append('pic', document.getElementById('add_pic').files[0]); // Kép hozzáadása
 
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/upload', {
+        const res = await fetch('/api/upload', {
             method: 'POST',
             body: formData,
             credentials: 'include'  // Hitelesítési adatok automatikus küldése
@@ -649,7 +649,7 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
 
 //kategoriak
 async function getCategories() {
-    const res = await fetch('http://127.0.0.1:3000/api/categories', {
+    const res = await fetch('/api/categories', {
         method: 'GET',
         credentials: 'include'
     });
@@ -706,7 +706,7 @@ function renderCategories(categories) {
 
 async function deleteCategory(categoryId) {
     try {
-        const res = await fetch(`http://127.0.0.1:3000/api/deleteCategory/${categoryId}`, {
+        const res = await fetch(`/api/deleteCategory/${categoryId}`, {
             method: 'DELETE',
             credentials: 'include'
         });
@@ -769,7 +769,7 @@ document.getElementById("editCategorrieForm").addEventListener("submit", async f
     console.log(`asd: ${cat_id}`);
 
     try {
-        const res = await fetch('http://127.0.0.1:3000/api/updateCategory', {
+        const res = await fetch('/api/updateCategory', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

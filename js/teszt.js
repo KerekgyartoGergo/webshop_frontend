@@ -60,7 +60,7 @@ async function getProduct() {
 
     try {
         // Módosított végpont és helyes GET kérés használata query paraméterrel
-        const res = await fetch(`http://127.0.0.1:3000/api/getItem?id=${id}`, {
+        const res = await fetch(`/api/getItem?id=${id}`, {
             method: 'GET',
             credentials: 'include',
             headers: {
@@ -98,7 +98,7 @@ function renderProduct(product) {
     picDiv.classList.add('pic-div');
     
     const img = document.createElement('img');
-    img.src = `http://127.0.0.1:3000/uploads/${product.pic || 'default.jpg'}`;
+    img.src = `/uploads/${product.pic || 'default.jpg'}`;
     img.alt = 'Product Image';
     img.classList.add('large-product-img');
     
@@ -180,7 +180,7 @@ function renderProduct(product) {
 
 
 async function logout(){
-    const res =await fetch('http://127.0.0.1:3000/api/logout',{
+    const res =await fetch('/api/logout',{
         method:'POST',
         credentials: 'include'
     });
@@ -198,7 +198,7 @@ async function logout(){
 //termék kosárhoz adása
 async function addToCart(product_id, quantity = 1) {
     try {
-        const response = await fetch('http://127.0.0.1:3000/api/addCart/', {
+        const response = await fetch('/api/addCart/', {
             method: 'POST',
             credentials: 'include',
             headers: {

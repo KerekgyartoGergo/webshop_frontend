@@ -7,7 +7,7 @@ const btnLogout =document.getElementsByClassName ('icon-logout')[0];
 btnLogout.addEventListener('click', logout);
 
 async function logout(){
-    const res =await fetch('http://127.0.0.1:3000/api/logout',{
+    const res =await fetch('/api/logout',{
         method:'POST',
         credentials: 'include'
     });
@@ -27,7 +27,7 @@ async function logout(){
 
 
 async function getOrders() {
-    const res = await fetch('http://127.0.0.1:3000/api/orders', {
+    const res = await fetch('/api/orders', {
         method: 'GET',
         credentials: 'include'
     });
@@ -102,7 +102,7 @@ function renderOrders(orders) {
                 <td>${product.product_id}</td>
                 <td>${product.name}</td>
                 <td>${product.stock}</td>
-                <td><img src="http://127.0.0.1:3000/uploads/${product.pic}" alt="${product.name}" width="50"></td>
+                <td><img src="/uploads/${product.pic}" alt="${product.name}" width="50"></td>
                 <td>${product.quantity}</td>
             `;
             productTableBody.appendChild(productRow);
@@ -127,7 +127,7 @@ function renderOrders(orders) {
 
         statusSelect.addEventListener('change', () => {
             const newStatus = statusSelect.value;
-            fetch(`http://127.0.0.1:3000/api/orders/${orderId}`, {
+            fetch(`/api/orders/${orderId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
