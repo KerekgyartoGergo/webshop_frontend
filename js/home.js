@@ -135,19 +135,43 @@ async function getCategories() {
     }
 }
 
-
 function renderCategories(categories) {
     const container = document.getElementsByClassName('kategoria')[0];
     container.innerHTML = '';
 
     for (const category of categories) {
-
         // Kategória név (linkként megjelenítve)
         const categoryLink = document.createElement('a');
         categoryLink.classList.add('kat');
         categoryLink.textContent = category.name;
+        categoryLink.href = '#'; // Megakadályozza az oldal újratöltését
+
+        // Kattintás esemény hozzáadása
+        categoryLink.addEventListener('click', (event) => {
+            event.preventDefault(); // Alapértelmezett link működésének megakadályozása
+            getProductsByCategory(category.name);
+        });
 
         container.appendChild(categoryLink);
+    }
+}
+
+async function getProductsByCategory(categoryName) {
+    try {
+        const res = await fetch(`/api/getProductsByCategory?category=${encodeURIComponent(categoryName)}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            throw new Error(`Hiba a termékek lekérésekor (${categoryName})`);
+        }
+
+        const products = await res.json();
+        console.log(`Termékek (${categoryName}):`, products);
+        renderProducts(products); // Ha szeretnéd megjeleníteni a termékeket
+    } catch (error) {
+        console.error('Hiba:', error);
     }
 }
 
