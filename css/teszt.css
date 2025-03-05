@@ -441,6 +441,7 @@ nav a {
         calc((1 - 1/var(--zoom))* (var(--x)))
     );
     cursor: zoom-in;
+    width: 500px;
 }
 #img:hover{
     --zoom:1.8;
