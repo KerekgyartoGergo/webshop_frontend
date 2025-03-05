@@ -239,7 +239,7 @@ nav a {
     cursor: crosshair;
   }
   
-  #img:hover {
+  #iemg:hover {
     --zoom:2; /* control the zoom level */
   }
 
