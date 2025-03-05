@@ -230,9 +230,9 @@ async function addToCart(product_id, quantity = 1) {
 
 
 
-let img = document.getElementById("img");
+let img2 = document.getElementById("img");
 
-img.onmousemove = function(e) {
+img2.onmousemove = function(e) {
   e.target.style.setProperty('--x',(100*e.offsetX/e.target.offsetWidth)+'%');
   e.target.style.setProperty('--y',(100*e.offsetY/e.target.offsetHeight)+'%'); 
 }
