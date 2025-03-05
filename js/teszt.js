@@ -175,6 +175,17 @@ function renderProduct(product) {
     productDetail.appendChild(productImage);
     productDetail.appendChild(productInfo);
     container.appendChild(productDetail);
+
+    
+    // Cursor követés a képen
+    let imgcursor = document.getElementById("iemg");
+
+    imgcursor.onmousemove = function(e) {
+    e.target.style.setProperty('--x',(100*e.offsetX/e.target.offsetWidth)+'%');
+    e.target.style.setProperty('--y',(100*e.offsetY/e.target.offsetHeight)+'%');
+    }
+
+    
 }
 
 
@@ -228,11 +239,3 @@ async function addToCart(product_id, quantity = 1) {
     }
 }
 
-
-
-let img = document.getElementById("iemg");
-
-img.onmousemove = function(e) {
-  e.target.style.setProperty('--x',(100*e.offsetX/e.target.offsetWidth)+'%');
-  e.target.style.setProperty('--y',(100*e.offsetY/e.target.offsetHeight)+'%'); 
-}
