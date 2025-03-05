@@ -429,20 +429,23 @@ nav a {
 
 
 
-#img{
-    --x:50%;
-    --y:50%;
+#img {
+    /* the coordinate of the zoom */
+    --x: 50%;
+    --y: 50%;
+    /**/
     transform: scale(var(--zoom));
     transform-origin: var(--x) var(--y);
     clip-path: inset(
-        calc((1 - 1/var(--zoom))* (var(--y)))
-        calc((1 - 1/var(--zoom))* (100% - var(--x)))
-        calc((1 - 1/var(--zoom))* (100% - var(--y)))
-        calc((1 - 1/var(--zoom))* (var(--x)))
+      calc((1 - 1/var(--zoom)) * (var(--y)))
+      calc((1 - 1/var(--zoom)) * (100% - var(--x)))
+      calc((1 - 1/var(--zoom)) * (100% - var(--y)))
+      calc((1 - 1/var(--zoom)) * (var(--x)))
     );
-    cursor: zoom-in;
-    width: 500px;
-}
-#img:hover{
-    --zoom:1.8;
-}
+    width: 200px;
+    cursor: crosshair;
+  }
+  
+  #img:hover {
+    --zoom:2; /* control the zoom level */
+  }
