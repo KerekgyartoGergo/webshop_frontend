@@ -101,6 +101,7 @@ function renderProduct(product) {
     img.src = `/uploads/${product.pic || 'default.jpg'}`;
     img.alt = 'Product Image';
     img.classList.add('large-product-img');
+    img.id.add('img');
     
     picDiv.appendChild(img);
     productImage.appendChild(picDiv);
