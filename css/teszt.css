@@ -222,7 +222,7 @@ nav a {
     flex: 1;
 }
 
-#img {
+#iemg {
     /* the coordinate of the zoom */
     --x: 50%;
     --y: 50%;
