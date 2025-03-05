@@ -240,5 +240,8 @@ async function searchingProduct(searchQuery) {
     console.log(data);
 
     renderProducts(data);
+    if (txttxt.value=== 0){
+        getProducts();
+    }
 
 }
