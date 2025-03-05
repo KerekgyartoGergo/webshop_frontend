@@ -192,26 +192,12 @@ nav a {
     display: flex;
 }
 
-#img {
-    /* the coordinate of the zoom */
-    --x: 50%;
-    --y: 50%;
-    /**/
-    transform: scale(var(--zoom));
-    transform-origin: var(--x) var(--y);
-    clip-path: inset(
-      calc((1 - 1/var(--zoom)) * (var(--y)))
-      calc((1 - 1/var(--zoom)) * (100% - var(--x)))
-      calc((1 - 1/var(--zoom)) * (100% - var(--y)))
-      calc((1 - 1/var(--zoom)) * (var(--x)))
-    );
-    width: 500px;
-    cursor: crosshair;
-  }
-  
-  #img:hover {
-    --zoom:2; /* control the zoom level */
-  }
+.large-product-img {
+    max-width: 80%;
+    margin: 0 auto;
+    display: block;
+    border-radius: 15px;
+}
 
 .add-to-cart-btn {
     background-color: #A59568;
