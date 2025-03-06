@@ -167,7 +167,8 @@ function renderProduct(product) {
     addToCartBtn.classList.add('add-to-cart-btn');
     addToCartBtn.textContent = 'Kosárba rakom';
     addToCartBtn.addEventListener('click', () => addToCart(product.product_id, 1));
-
+    const price =document.createElement('div');
+    price.textContent =product.price;
 
     // Összeállítás
     productInfo.appendChild(probaDiv);
