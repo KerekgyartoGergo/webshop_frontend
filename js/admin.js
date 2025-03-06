@@ -535,7 +535,7 @@ function openAddModal() {
     document.getElementById('add_price').value = '';
     document.getElementById('add_description').value = '';
     document.getElementById('add_stock').value = '';
-    document.getElementById('add_category_id').value = '';
+    document.getElementById('add_category_id').value = product.category_id || '';
     document.getElementById('add_pic').value = '';  
 
     // Megjelenítjük a modalt
