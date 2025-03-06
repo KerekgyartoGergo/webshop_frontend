@@ -180,7 +180,7 @@ buttonContainer.appendChild(addToCartBtn);
 buttonContainer.appendChild(priceText);
 
 // Hozzáadás a DOM-hoz
-document.body.appendChild(buttonContainer);
+productInfo.appendChild(buttonContainer);
 
 
     // Összeállítás
