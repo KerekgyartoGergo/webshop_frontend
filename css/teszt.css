@@ -203,6 +203,7 @@ nav a {
     border: none;
     margin-top: 20px;
     cursor: pointer;
+    max-width: 600px;
 }
 
 .add-to-cart-btn:hover {
