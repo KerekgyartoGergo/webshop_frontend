@@ -399,10 +399,12 @@ nav a {
     font-size: 1.5rem;
     border: none;
     margin-top: 20px;
-    cursor: pointer;
-    display: inline-block;
+    display: flex;
     text-align: center;
-    transition: background-color 0.3s ease;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    
 }
 
 
