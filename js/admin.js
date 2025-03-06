@@ -529,12 +529,17 @@ span2.addEventListener('click', () => {
     modal2.style.display="none";
 });
 
-async function fetchCategories() {
+
+
+// Kategóriák lekérése és betöltése a legördülő listába
+async function fetchCategoriesForAdd() {
     try {
         const res = await fetch('/api/categories', { method: 'GET' });
         const categories = await res.json();
 
-        const categorySelect = document.getElementById('category_id');
+        const categorySelect = document.getElementById('add_category_id');
+        categorySelect.innerHTML = ''; // Korábbi kategóriák törlése
+
         categories.forEach(category => {
             const option = document.createElement('option');
             option.value = category.category_id; // category_id érték
@@ -546,20 +551,61 @@ async function fetchCategories() {
     }
 }
 
-
-function openAddModal(product) {
+function openAddModal() {
+    // Alapértelmezett értékek beállítása az űrlap mezőiben
     document.getElementById('add_name').value = '';
     document.getElementById('add_price').value = '';
     document.getElementById('add_description').value = '';
     document.getElementById('add_stock').value = '';
-    document.getElementById('add_category_id').value = product.category_id || '';
+    document.getElementById('add_category_id').value = '';
     document.getElementById('add_pic').value = '';  
 
+    // Kategóriák betöltése
+    fetchCategoriesForAdd();
+
     // Megjelenítjük a modalt
-    const modal = document.getElementById('addModal');
-    modal.style.display = "block";
+    modal2.style.display = "block";
 }
 
+// Hozzáadás form elküldése
+document.getElementById("addForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    try {
+        const res = await fetch('/api/addItem', {
+            method: 'POST',
+            body: formData,
+            credentials: 'include' // Hitelesítési adatok automatikus küldése
+        });
+
+        console.log('HTTP status:', res.status);
+
+        let data;
+        try {
+            data = await res.json();
+        } catch (err) {
+            console.error('JSON parsing error:', err);
+            data = { error: 'Nem lehetett beolvasni a választ JSON formátumban' };
+        }
+
+        console.log(data);
+
+        if (res.ok) {
+            alert('Termék sikeresen hozzáadva');
+            getProducts(); // Frissítjük a termék listát
+            modal2.style.display = "none";
+        } else if (data.error) {
+            alert(data.error);
+        } else {
+            alert('Ismeretlen hiba');
+        }
+    } catch (error) {
+        console.error('Hálózati hiba történt:', error);
+        alert('Hálózati hiba történt');
+    }
+});
 
 //kategoria hozzáadása
 
