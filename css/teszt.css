@@ -200,10 +200,12 @@ nav a {
     padding: 10px 20px;
     border-radius: 10px;
     font-weight: bold;
+    font-size: 1.5rem;
     border: none;
     margin-top: 20px;
     cursor: pointer;
-    max-width: 600px;
+    height: 48px;
+    width: 200px;
 }
 
 .add-to-cart-btn:hover {
