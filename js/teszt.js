@@ -163,36 +163,26 @@ function renderProduct(product) {
     columns.forEach(col => productSpecs.appendChild(col));
 
     // Kosárba rakom gomb
-const addToCartBtn = document.createElement('button');
-addToCartBtn.classList.add('add-to-cart-btn');
-addToCartBtn.textContent = 'Kosárba rakom';
-addToCartBtn.addEventListener('click', () => addToCart(product.product_id, 1));
+    const addToCartBtn = document.createElement('button');
+    addToCartBtn.classList.add('add-to-cart-btn');
+    addToCartBtn.textContent = 'Kosárba rakom';
+    addToCartBtn.addEventListener('click', () => addToCart(product.product_id, 1));
 
-// Termék árának szövege
-const priceText = document.createElement('span');
-priceText.classList.add('product-price');
-priceText.textContent = `${product.price} Ft`;
-
-// Képzeljük el, hogy a gombot és az árat egy szülő elembe rakjuk
-const buttonContainer = document.createElement('div');
-buttonContainer.classList.add('button-container');
-buttonContainer.appendChild(addToCartBtn);
-buttonContainer.appendChild(priceText);
-
-// Hozzáadás a DOM-hoz
-productInfo.appendChild(buttonContainer);
-
+    // Ár megjelenítése
+    const priceDisplay = document.createElement('p');
+    priceDisplay.classList.add('product-price');
+    priceDisplay.textContent = `Ár: ${product.price ? `${product.price} Ft` : 'N/A'}`;
 
     // Összeállítás
     productInfo.appendChild(probaDiv);
     productInfo.appendChild(productSpecs);
+    productInfo.appendChild(priceDisplay); // Ide helyezhetjük az árat
     productInfo.appendChild(addToCartBtn);
     
     productDetail.appendChild(productImage);
     productDetail.appendChild(productInfo);
     container.appendChild(productDetail);
 
-    
     // Cursor követés a képen
     let imgcursor = document.getElementById("iemg");
 
@@ -200,8 +190,6 @@ productInfo.appendChild(buttonContainer);
     e.target.style.setProperty('--x',(100*e.offsetX/e.target.offsetWidth)+'%');
     e.target.style.setProperty('--y',(100*e.offsetY/e.target.offsetHeight)+'%');
     }
-
-    
 }
 
 
