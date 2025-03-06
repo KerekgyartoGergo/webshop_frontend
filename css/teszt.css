@@ -432,6 +432,7 @@ nav a {
 
     .add-to-cart-btn {
         width: 100%;
+        font-size: 0.9rem;
 
     }
     .product-price{
@@ -454,6 +455,11 @@ nav a {
         left: 0;
         font-size: 1.5rem;
         display: none;
+    }
+
+    .large-product-img{
+        width: 300px;
+        height: 300px;
     }
 }
 
