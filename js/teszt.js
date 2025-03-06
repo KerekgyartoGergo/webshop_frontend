@@ -209,7 +209,8 @@ async function logout(){
     }
 }
 
-//termék kosárhoz adása
+
+// termék kosárhoz adása
 async function addToCart(product_id, quantity = 1) {
     try {
         const response = await fetch('/api/addCart/', {
@@ -227,10 +228,13 @@ async function addToCart(product_id, quantity = 1) {
             throw new Error(data.error || 'Hiba történt a termék kosárba helyezésekor.');
         }
 
+        // Displaying success message with product price
+        const message = `${data.message} - Ár: ${data.price} Ft`;
+
         Swal.fire({
             position: "center",
             icon: "success",
-            title: data.message,
+            title: message,
             showConfirmButton: false,
             timer: 1500,
             theme: 'dark'
@@ -240,4 +244,5 @@ async function addToCart(product_id, quantity = 1) {
         alert(error.message);
     }
 }
+
 

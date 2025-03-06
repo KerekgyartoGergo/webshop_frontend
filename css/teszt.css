@@ -391,6 +391,7 @@ nav a {
     }
 }
 
+
 @media screen and (max-width: 768px) {
     .product-detail {
         flex-direction: column;
