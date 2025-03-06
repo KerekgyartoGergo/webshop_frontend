@@ -432,6 +432,11 @@ nav a {
 
     .add-to-cart-btn {
         width: 100%;
+
+    }
+    .product-price{
+        width: 100%;
+        font-size: 0.9rem;
     }
 
     .hamburger-menu {
