@@ -269,3 +269,25 @@ async function searchingProduct(searchQuery) {
     }
 
 }
+
+async function fetchCartTotalQuantity() {
+    try {
+        const response = await fetch('/api/getCartTotalQuantity', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+
+        });
+        
+        if (!response.ok) {
+            throw new Error('Hiba a kosár mennyiségének lekérdezésekor');
+        }
+
+        const data = await response.json();
+        document.getElementById('cart-quantity').textContent = data.total_quantity;
+    } catch (error) {
+        console.error(error);
+    }
+}
