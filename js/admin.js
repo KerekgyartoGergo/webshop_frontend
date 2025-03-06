@@ -529,6 +529,23 @@ span2.addEventListener('click', () => {
     modal2.style.display="none";
 });
 
+async function fetchCategories() {
+    try {
+        const res = await fetch('/api/categories', { method: 'GET' });
+        const categories = await res.json();
+
+        const categorySelect = document.getElementById('category_id');
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.category_id; // category_id érték
+            option.textContent = category.name;  // category neve
+            categorySelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Kategóriák betöltése sikertelen:', error);
+    }
+}
+
 
 function openAddModal() {
     document.getElementById('add_name').value = '';
