@@ -10,6 +10,7 @@ const katElements = Array.from(document.getElementsByClassName('kat'));
 
 window.addEventListener('DOMContentLoaded', getCategories)
 window.addEventListener('DOMContentLoaded', getProducts)
+window.addEventListener('DOMContentLoaded', fetchCartTotalQuantity)
 
 katElements.forEach(kat => {
     kat.addEventListener('click', () => {
@@ -135,19 +136,43 @@ async function getCategories() {
     }
 }
 
-
 function renderCategories(categories) {
     const container = document.getElementsByClassName('kategoria')[0];
     container.innerHTML = '';
 
     for (const category of categories) {
-
         // Kategória név (linkként megjelenítve)
         const categoryLink = document.createElement('a');
         categoryLink.classList.add('kat');
         categoryLink.textContent = category.name;
+        categoryLink.href = '#'; // Megakadályozza az oldal újratöltését
+
+        // Kattintás esemény hozzáadása
+        categoryLink.addEventListener('click', (event) => {
+            event.preventDefault(); // Alapértelmezett link működésének megakadályozása
+            getProductsByCategory(category.name);
+        });
 
         container.appendChild(categoryLink);
+    }
+}
+
+async function getProductsByCategory(categoryName) {
+    try {
+        const res = await fetch(`/api/getProductsByCategory?category=${encodeURIComponent(categoryName)}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (!res.ok) {
+            throw new Error(`Hiba a termékek lekérésekor (${categoryName})`);
+        }
+
+        const products = await res.json();
+        console.log(`Termékek (${categoryName}):`, products);
+        renderProducts(products); // Ha szeretnéd megjeleníteni a termékeket
+    } catch (error) {
+        console.error('Hiba:', error);
     }
 }
 
@@ -183,6 +208,7 @@ async function addToCart(product_id, quantity = 1) {
             timer: 1500,
             theme: 'dark'
         });
+        fetchCartTotalQuantity();
     } catch (error) {
         console.error('Hiba a kosárhoz adás során:', error);
         alert(error.message);
@@ -240,5 +266,32 @@ async function searchingProduct(searchQuery) {
     console.log(data);
 
     renderProducts(data);
+    if (txttxt.value=== 0){
+        getProducts();
+    }
 
+}
+
+async function fetchCartTotalQuantity() {
+    try {
+        const response = await fetch('/api/getCartTotalQuantity', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+
+        });
+        
+        if (!response.ok) {
+            throw new Error('Hiba a kosár mennyiségének lekérdezésekor');
+        }
+
+        const data = await response.json();
+        console.log(data);
+        const cartindex = document.getElementsByClassName('cart_index')[0];
+        cartindex.textContent= data.total_quantity;
+    } catch (error) {
+        console.error(error);
+    }
 }
