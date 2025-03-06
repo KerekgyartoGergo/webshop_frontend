@@ -287,6 +287,7 @@ async function fetchCartTotalQuantity() {
         }
 
         const data = await response.json();
+        console.log("szam:" + data.total_quantity);
         console.log(data);
         document.getElementById('cart-index').textContent = data.total_quantity;
     } catch (error) {
