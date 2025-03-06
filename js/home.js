@@ -289,7 +289,8 @@ async function fetchCartTotalQuantity() {
         const data = await response.json();
         console.log("szam:" + data.total_quantity);
         console.log(data);
-        document.getElementsByClassName('cart-index')[0].textContent = data.total_quantity;
+        const cartindex = document.getElementsByClassName('cart-index')[0];
+        cartindex.textContent= data.total_quantity;
     } catch (error) {
         console.error(error);
     }
