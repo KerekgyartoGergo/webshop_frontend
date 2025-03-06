@@ -342,6 +342,41 @@ async function deleteItem(productId) {
     }
 }
 
+// Kategóriák betöltése a legördülő menübe
+fetch('/api/categories') // Az API, ami visszaadja a kategóriákat
+.then(response => response.json())
+.then(data => {
+    const select = document.getElementById('category_id');
+    data.categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id;
+        option.textContent = category.name;
+        select.appendChild(option);
+    });
+})
+.catch(error => console.error('Hiba a kategóriák betöltésekor:', error));
+
+// Form elküldése
+document.getElementById('updateForm').addEventListener('submit', function (event) {
+event.preventDefault();
+
+const formData = new FormData(this);
+
+fetch('/api/updateItem', {
+    method: 'POST',
+    body: formData
+})
+.then(response => response.json())
+.then(data => {
+    if (data.error) {
+        alert(data.error);
+    } else {
+        alert(data.message);
+    }
+})
+.catch(error => console.error('Hiba a termék frissítésekor:', error));
+});
+
 
 // Termék szerkesztése
 const modal = document.getElementById("editModal");

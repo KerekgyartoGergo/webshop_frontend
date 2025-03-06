@@ -102,6 +102,7 @@
             <input type="text" id="Érzékenység" name="Érzékenység"><br><br>
             
             <button type="submit">Frissítés</button>
+            
         </form>
     </div>
 </div>
@@ -161,8 +162,10 @@
                 <input type="number" id="price" name="price"><br><br>
                 <label for="stock">Készlet:</label><br>
                 <input type="number" id="stock" name="stock"><br><br>
-                <label for="category_id">Kategória ID:</label><br>
-                <input type="number" id="category_id" name="category_id"><br><br>
+                <label for="category_id">Kategória:</label>
+                <select id="category_id" name="category_id" required>
+                    <!-- Kategóriák itt lesznek betöltve -->
+                </select><br><br>
                 <label for="pic">Kép:</label><br>
                 <input type="file" id="pic" name="pic"><br><br>
                 <input type="hidden" id="product_id" name="product_id">
