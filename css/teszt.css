@@ -390,6 +390,28 @@ nav a {
         max-width: 600px;
     }
 }
+.product-price {
+    background-color: #A59568;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.product-price:hover {
+    background-color: #776a44;
+}
+
+.product-price:active {
+    background-color: #5e4e2b;
+}
 
 
 @media screen and (max-width: 768px) {
