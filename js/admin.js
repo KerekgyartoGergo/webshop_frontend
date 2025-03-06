@@ -342,40 +342,7 @@ async function deleteItem(productId) {
     }
 }
 
-// Kategóriák betöltése a legördülő menübe
-fetch('/api/categories') // Az API, ami visszaadja a kategóriákat
-.then(response => response.json())
-.then(data => {
-    const select = document.getElementById('category_id');
-    data.categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category.id;
-        option.textContent = category.name;
-        select.appendChild(option);
-    });
-})
-.catch(error => console.error('Hiba a kategóriák betöltésekor:', error));
 
-// Form elküldése
-document.getElementById('updateForm').addEventListener('submit', function (event) {
-event.preventDefault();
-
-const formData = new FormData(this);
-
-fetch('/api/updateItem', {
-    method: 'POST',
-    body: formData
-})
-.then(response => response.json())
-.then(data => {
-    if (data.error) {
-        alert(data.error);
-    } else {
-        alert(data.message);
-    }
-})
-.catch(error => console.error('Hiba a termék frissítésekor:', error));
-});
 
 
 // Termék szerkesztése
@@ -387,17 +354,39 @@ span.addEventListener('click', () => {
     modal.style.display = "none";
 });
 
+
+async function fetchCategories() {
+    try {
+        const res = await fetch('/api/categories', { method: 'GET' });
+        const categories = await res.json();
+
+        const categorySelect = document.getElementById('category_id');
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.category_id; // category_id érték
+            option.textContent = category.name;  // category neve
+            categorySelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Kategóriák betöltése sikertelen:', error);
+    }
+}
+
+
 function openEditModal(product) {
     // Betöltjük a termék adatait a modalba
     document.getElementById('name').value = product.name;
     document.getElementById('price').value = product.price;
     document.getElementById('description').value = product.description || '';
     document.getElementById('stock').value = product.stock || '';
-    document.getElementById('category_id').value = product.category_id || '';
+    document.getElementById('category_id').value = product.category_id || '';  // Kategória ID automatikusan beállítva
     document.getElementById('pic').src = `/uploads/${product.pic}`;
     
     // Termék ID mentése egy változóba
     currentProductId = product.product_id;
+
+    // Betöltjük a kategóriákat a legördülő listába
+    fetchCategories();
 
     modal.style.display = "block";
 }
@@ -429,7 +418,7 @@ document.getElementById("editForm").addEventListener("submit", async function(ev
 
         if (res.ok) {
             alert('Termék sikeresen frissítve');
-            getProducts ();
+            getProducts(); // Új termék lista betöltése
             modal.style.display = "none";
             // További műveletek, például a termék frissítése a felületen
         } else if (data.error) {
