@@ -1,29 +1,26 @@
-const btnLogout =document.getElementsByClassName ('icon-logout')[0];
-const btnProfile =document.getElementsByClassName ('icon-user')[0];
-const btnCart =document.getElementsByClassName ('icon-cart')[0];
+const btnLogout = document.getElementsByClassName('icon-logout')[0];
+const btnProfile = document.getElementsByClassName('icon-user')[0];
+const btnCart = document.getElementsByClassName('icon-cart')[0];
 const btnAddToCart = document.getElementsByClassName('add-to-cart-btn')[0];
 const btnMenuLogo = document.getElementsByClassName('menu-logo')[0];
 
-btnLogout.addEventListener('click', ()=>{
-    window.location.href='../index.html';
+btnLogout.addEventListener('click', () => {
+    window.location.href = '../index.html';
 });
 
-
-btnProfile.addEventListener('click', ()=>{
-    window.location.href='../profile.html';
+btnProfile.addEventListener('click', () => {
+    window.location.href = '../profile.html';
 });
 
-btnCart.addEventListener('click', ()=>{
-    window.location.href='../cart.html';
+btnCart.addEventListener('click', () => {
+    window.location.href = '../cart.html';
 });
 
-btnMenuLogo.addEventListener('click', ()=>{
-    window.location.href='../home.html';
+btnMenuLogo.addEventListener('click', () => {
+    window.location.href = '../home.html';
 });
 
 window.addEventListener('DOMContentLoaded', getProduct)
-
-
 
 // Termék azonosító kinyerése az URL-ből
 const urlParams2 = new URLSearchParams(window.location.search);
@@ -43,9 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-
-
 
 async function getProduct() {
     // Az URL-ből lekérjük a product_id értékét
@@ -162,23 +156,32 @@ function renderProduct(product) {
 
     columns.forEach(col => productSpecs.appendChild(col));
 
+    // Kosárba rakom gomb és ár egymás mellett
+    const priceAndBtnContainer = document.createElement('div');
+    priceAndBtnContainer.classList.add('price-and-btn-container');
+    priceAndBtnContainer.style.display = 'flex';
+    priceAndBtnContainer.style.alignItems = 'center';
+    priceAndBtnContainer.style.gap = '20px'; // Különbözet a gomb és az ár között
+
+    // Ár
+    const priceDisplay = document.createElement('p');
+    priceDisplay.classList.add('product-price');
+    priceDisplay.textContent = `Ár: ${product.price ? `${product.price} Ft` : 'N/A'}`;
+    
     // Kosárba rakom gomb
     const addToCartBtn = document.createElement('button');
     addToCartBtn.classList.add('add-to-cart-btn');
     addToCartBtn.textContent = 'Kosárba rakom';
     addToCartBtn.addEventListener('click', () => addToCart(product.product_id, 1));
 
-    // Ár megjelenítése
-    const priceDisplay = document.createElement('p');
-    priceDisplay.classList.add('product-price');
-    priceDisplay.textContent = `Ár: ${product.price ? `${product.price} Ft` : 'N/A'}`;
+    priceAndBtnContainer.appendChild(priceDisplay);
+    priceAndBtnContainer.appendChild(addToCartBtn);
 
     // Összeállítás
     productInfo.appendChild(probaDiv);
     productInfo.appendChild(productSpecs);
-    productInfo.appendChild(priceDisplay); // Ide helyezhetjük az árat
-    productInfo.appendChild(addToCartBtn);
-    
+    productInfo.appendChild(priceAndBtnContainer); // Ár és gomb egy sorban
+
     productDetail.appendChild(productImage);
     productDetail.appendChild(productInfo);
     container.appendChild(productDetail);
@@ -187,30 +190,26 @@ function renderProduct(product) {
     let imgcursor = document.getElementById("iemg");
 
     imgcursor.onmousemove = function(e) {
-    e.target.style.setProperty('--x',(100*e.offsetX/e.target.offsetWidth)+'%');
-    e.target.style.setProperty('--y',(100*e.offsetY/e.target.offsetHeight)+'%');
+        e.target.style.setProperty('--x', (100 * e.offsetX / e.target.offsetWidth) + '%');
+        e.target.style.setProperty('--y', (100 * e.offsetY / e.target.offsetHeight) + '%');
     }
 }
 
-
-
-
-async function logout(){
-    const res =await fetch('/api/logout',{
-        method:'POST',
+async function logout() {
+    const res = await fetch('/api/logout', {
+        method: 'POST',
         credentials: 'include'
     });
 
-    const data =await res.json();
+    const data = await res.json();
 
-    if(res.ok){
+    if (res.ok) {
         alert(data.message);
-        window.location.href='../index.html';
-    }else{
+        window.location.href = '../index.html';
+    } else {
         alert('Hiba a kijelentkezéskor!')
     }
 }
-
 
 // termék kosárhoz adása
 async function addToCart(product_id, quantity = 1) {
@@ -246,5 +245,3 @@ async function addToCart(product_id, quantity = 1) {
         alert(error.message);
     }
 }
-
-
