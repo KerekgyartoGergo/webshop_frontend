@@ -80,12 +80,15 @@ body{
 
 @media screen and (max-width: 430px){
     .login, .reg{
-        width: 350px;
+        width: 300px;
 
     }
     .focim{
         font-size: 4rem;
         font-weight: 600;
+    }
+    footer{
+        width: 300px;
     }
 }
 
