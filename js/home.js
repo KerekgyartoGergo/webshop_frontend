@@ -10,6 +10,7 @@ const katElements = Array.from(document.getElementsByClassName('kat'));
 
 window.addEventListener('DOMContentLoaded', getCategories)
 window.addEventListener('DOMContentLoaded', getProducts)
+window.addEventListener('DOMContentLoaded', fetchCartTotalQuantity)
 
 katElements.forEach(kat => {
     kat.addEventListener('click', () => {
