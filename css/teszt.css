@@ -458,7 +458,7 @@ nav a {
     }
 
     .large-product-img{
-        width: 300px;
+        width: 300px!important;
         height: 300px;
     }
 }
