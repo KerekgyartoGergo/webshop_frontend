@@ -547,7 +547,7 @@ async function fetchCategories() {
 }
 
 
-function openAddModal() {
+function openAddModal(product) {
     document.getElementById('add_name').value = '';
     document.getElementById('add_price').value = '';
     document.getElementById('add_description').value = '';
