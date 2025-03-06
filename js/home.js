@@ -286,7 +286,7 @@ async function fetchCartTotalQuantity() {
         }
 
         const data = await response.json();
-        document.getElementById('cart-quantity').textContent = data.total_quantity;
+        document.getElementById('cart-index').textContent = data.total_quantity;
     } catch (error) {
         console.error(error);
     }
