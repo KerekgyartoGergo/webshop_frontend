@@ -149,6 +149,26 @@ nav a {
     background-color: rgb(221, 75, 75);
 }
 
+.icon-cart{
+    position: relative;
+}
+
+
+.cart_index{
+    background-color: #776a44;
+    color:white;
+    z-index: 100px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size: small;
+    text-align: center;
+    padding-top: 2px;
+}
+
 /*search*/
 .search11{
     width: 350px;
