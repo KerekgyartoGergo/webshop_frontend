@@ -168,17 +168,21 @@ function renderProduct(product) {
     addToCartBtn.textContent = 'Kosárba rakom';
     addToCartBtn.addEventListener('click', () => addToCart(product.product_id, 1));
 
+    // Ár megjelenítése
+    const priceDisplay = document.createElement('p');
+    priceDisplay.classList.add('product-price');
+    priceDisplay.textContent = `Ár: ${product.price ? `${product.price} Ft` : 'N/A'}`;
 
     // Összeállítás
     productInfo.appendChild(probaDiv);
     productInfo.appendChild(productSpecs);
+    productInfo.appendChild(priceDisplay); // Ide helyezhetjük az árat
     productInfo.appendChild(addToCartBtn);
     
     productDetail.appendChild(productImage);
     productDetail.appendChild(productInfo);
     container.appendChild(productDetail);
 
-    
     // Cursor követés a képen
     let imgcursor = document.getElementById("iemg");
 
@@ -186,8 +190,6 @@ function renderProduct(product) {
     e.target.style.setProperty('--x',(100*e.offsetX/e.target.offsetWidth)+'%');
     e.target.style.setProperty('--y',(100*e.offsetY/e.target.offsetHeight)+'%');
     }
-
-    
 }
 
 
