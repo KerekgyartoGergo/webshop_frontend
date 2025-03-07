@@ -408,6 +408,9 @@ main {
     .order-card img {
         width: 40px;
     }
+    .orderList{
+        justify-content: center;
+    }
 }
 
 /* Státusz módosító legördülő menü */
