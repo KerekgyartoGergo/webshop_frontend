@@ -61,7 +61,7 @@ function renderProducts(products) {
         // fejléc
         const cardHeaderDiv = document.createElement('div');
         cardHeaderDiv.classList.add('card-header');
-        cardHeaderDiv.textContent = product.name;
+        //cardHeaderDiv.textContent = product.name;
 
         // Kattintás esemény hozzáadása a kártya fejlécéhez
         
