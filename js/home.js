@@ -89,7 +89,6 @@ function renderProducts(products) {
 
         const markaDiv = document.createElement('div');
         markaDiv.classList.add('marka');
-        markaDiv.textContent = `${product.name}`;
 
         const termek_nev = document.createElement('div');
         termek_nev.classList.add('termek-nev');
