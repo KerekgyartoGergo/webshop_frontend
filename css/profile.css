@@ -19,18 +19,96 @@ input{
     animation: loaderAnimation 1.5s ease-in-out;
 }
 
-/* lábléc */
+/* footer mindig az alján */
 footer {
+    margin-top: auto; /* Ez biztosítja, hogy a footer az alján helyezkedjen el */
     background-color: #292929;
-    padding: 20px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    z-index: 1000;
     color: white;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 2px;
+}
+
+.footer-column ul li {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.footer-column a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    background-color: #222;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0;
+    position: relative;
+    bottom: -20px;
+    left: 0;
+}
+
+.footer-column-title {
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .footer-column {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .footer-column ul {
+        display: none;
+    }
+    .footer-column ul li {
+        text-align: left;
+    }
+
+    .footer-column.active ul {
+        display: block;
+    }
+    .footer-column-title {
+        text-align: center;
+    }
+    .footer-content {
+        margin: auto;
+    }
 }
 
 /* --- a fejléc a menüvel --- */

@@ -18,6 +18,17 @@ katElements.forEach(kat => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const footerColumns = document.querySelectorAll('.footer-column');
+
+    footerColumns.forEach(column => {
+        const title = column.querySelector('.footer-column-title');
+        title.addEventListener('click', () => {
+            column.classList.toggle('active');
+        });
+    });
+});
+
 
 
 function toggleCartDisplay() {
