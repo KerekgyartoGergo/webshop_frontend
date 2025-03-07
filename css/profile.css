@@ -382,6 +382,34 @@ main {
     border-radius: 5px;
 }
 
+/* Mobilbarát nézet */
+@media (max-width: 768px) {
+    .order-card {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .order-card .order-header {
+        flex-direction: column;
+        font-size: 1rem;
+    }
+
+    .order-card table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .order-card th, .order-card td {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .order-card img {
+        width: 40px;
+    }
+}
+
 /* Státusz módosító legördülő menü */
 .select {
     display: flex;
