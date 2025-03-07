@@ -405,6 +405,9 @@ main {
     .order-card img {
         width: 30px;
     }
+    .ordersList{
+        margin-left: 15px; 
+}
 }
 
 /* Státusz módosító legördülő menü */
