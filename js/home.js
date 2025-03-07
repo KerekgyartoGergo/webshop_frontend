@@ -20,6 +20,30 @@ katElements.forEach(kat => {
 
 
 
+function toggleCartDisplay() {
+    if (window.matchMedia("(max-width: 768px)").matches) { // Csak mobil nézetben
+        document.querySelector(".input").addEventListener("mouseover", function() {
+            document.querySelector(".icon-cart").style.display = "none";
+            document.querySelector(".icon-user").style.display = "none";
+            document.querySelector(".icon-logout").style.display = "none";
+        });
+
+        document.querySelector(".input").addEventListener("mouseout", function() {
+            document.querySelector(".icon-cart").style.display = "";
+            document.querySelector(".icon-user").style.display = "";
+            document.querySelector(".icon-logout").style.display = "";
+        });
+    }
+}
+
+// Betöltéskor ellenőrizzük
+toggleCartDisplay();
+
+// Ha a képernyőméret változik, frissítjük
+window.addEventListener("resize", toggleCartDisplay);
+
+
+
 
 btnProfile.addEventListener('click', () => {
     window.location.href = '../profile.html';

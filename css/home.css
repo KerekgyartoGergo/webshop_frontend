@@ -196,9 +196,10 @@ nav a {
     outline: none;
     transition: .5s;
 }
-.input:hover{
+.input:hover {
     color: white;
 }
+
 .box:hover input{
     width: 350px;
     background: inherit;
