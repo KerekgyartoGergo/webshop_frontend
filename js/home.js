@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function toggleCartDisplay() {
-    if (window.matchMedia("(max-width: 250px)").matches) { // Csak mobil nézetben
+    if (window.matchMedia("(max-width: 768px)").matches) { // Csak mobil nézetben
         document.querySelector(".input").addEventListener("mouseover", function() {
             document.querySelector(".icon-cart").style.display = "none";
             document.querySelector(".icon-user").style.display = "none";
