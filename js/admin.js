@@ -17,10 +17,16 @@ async function logout(){
     const data =await res.json();
 
     if(res.ok){
-        alert(data.message);
+        //alert(data.message);
+        Swal.fire(data.message);
         window.location.href='../index.html';
     }else{
-        alert('Hiba a kijelentkezéskor!')
+        //alert('Hiba a kijelentkezéskor!')
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Hiba a kijelentkezéskor!"
+          });
     }
 }
 
@@ -105,9 +111,20 @@ function renderUsers(users) {
 }
 
 
-//felhasználó törlése
+// Felhasználó törlése
 async function deleteUser(userId) {
-    if (confirm('Biztosan törölni akarod a felhasználót?')) {
+    const result = await Swal.fire({
+        title: 'Biztosan törölni akarod a felhasználót?',
+        text: "A művelet nem visszavonható!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Igen, törlöm!',
+        cancelButtonText: 'Mégse'
+    });
+
+    if (result.isConfirmed) {
         try {
             const res = await fetch('/api/deleteUser', {
                 method: 'DELETE',
@@ -134,20 +151,35 @@ async function deleteUser(userId) {
             console.log(data);
 
             if (res.ok) {
-                alert('Felhasználó sikeresen törölve');
+                Swal.fire({
+                    title: "Felhasználó sikeresen törölve",
+                    icon: "success"
+                });
                 getUsers();
                 // További műveletek, például a felhasználó eltávolítása a felületről
             } else if (data.error) {
-                alert(data.error);
+                Swal.fire({
+                    title: data.error,
+                    icon: "error"
+                });
             } else {
-                alert('Ismeretlen hiba');
+                Swal.fire({
+                    title: "Ismeretlen hiba",
+                    icon: "error"
+                });
             }
         } catch (error) {
             console.error('Hálózati hiba történt:', error);
-            alert('Hálózati hiba történt');
+            Swal.fire({
+                title: "Hálózati hiba történt",
+                icon: "error"
+            });
         }
     } else {
-        alert('A törlési művelet megszakítva');
+        Swal.fire({
+            title: "A törlési művelet megszakítva",
+            icon: "info"
+        });
     }
 }
 
