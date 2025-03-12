@@ -220,17 +220,37 @@ async function editUser(userId) {
         console.log(data);
 
         if (res.ok) {
-            alert('Szerepkör sikeresen frissítve');
+            //alert('Szerepkör sikeresen frissítve');
+            Swal.fire({
+                title: "Szerepkör sikeresen frissítve",
+                icon: "success",
+                theme: 'dark'
+            });
             getUsers();
             // További műveletek, például a felhasználó szerepkörének frissítése a felületen
         } else if (data.error) {
-            alert(data.error);
+            //alert(data.error);
+            Swal.fire({
+                title: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
         } else {
-            alert('Ismeretlen hiba');
+            //alert('Ismeretlen hiba');
+            Swal.fire({
+                title: "Ismeretlen hiba",
+                icon: "error",
+                theme: 'dark'
+            });
         }
     } catch (error) {
         console.error('Hálózati hiba történt:', error);
-        alert('Hálózati hiba történt');
+        //alert('Hálózati hiba történt');
+        Swal.fire({
+            title: "Hálózati hiba történt!",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
 
@@ -341,43 +361,81 @@ tbody.appendChild(row);
 
 //termék törlése
 async function deleteItem(productId) {
-    if (confirm('Biztosan törölni akarod a terméket?')) {
+    const confirmResult = await Swal.fire({
+        title: "Biztosan törölni akarod a terméket?",
+        text: "Ez a művelet nem visszavonható!",
+        icon: "warning",
+        theme: "dark",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Igen, törlöm!",
+        cancelButtonText: "Mégse"
+    });
+
+    if (confirmResult.isConfirmed) {
         try {
-            const res = await fetch('/api/deleteProduct/' + productId, {
-                method: 'DELETE',
+            const res = await fetch("/api/deleteProduct/" + productId, {
+                method: "DELETE",
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
-                credentials: 'include' // Hitelesítési adatok automatikus küldése
+                credentials: "include"
             });
 
-
-            // Megpróbáljuk beolvasni a válasz adatokat JSON formátumban
             let data;
             try {
                 data = await res.json();
             } catch (err) {
-                // Ha a JSON parsing hibát okoz, naplózunk és feltételezhetjük, hogy a válasz nem JSON formátumú
-                console.error('JSON parsing error:', err);
-                data = { error: 'Nem lehetett beolvasni a választ JSON formátumban' };
+                console.error("JSON parsing error:", err);
+                data = { error: "Nem lehetett beolvasni a választ JSON formátumban" };
             }
 
             console.log(data);
 
             if (res.ok) {
-                alert('Termék sikeresen törölve');
-                getProducts ();
+                Swal.fire({
+                    title: "Termék sikeresen törölve",
+                    icon: "success",
+                    theme: "dark"
+                });
+                // alert("Termék sikeresen törölve");
+                getProducts();
             } else if (data.error) {
-                alert(data.error);
+                Swal.fire({
+                    title: "Hiba!",
+                    text: data.error,
+                    icon: "error",
+                    theme: "dark"
+                });
+                // alert(data.error);
             } else {
-                alert('Ismeretlen hiba');
+                Swal.fire({
+                    title: "Hiba!",
+                    text: "Ismeretlen hiba történt.",
+                    icon: "error",
+                    theme: "dark"
+                });
+                // alert("Ismeretlen hiba");
             }
         } catch (error) {
-            console.error('Hálózati hiba történt:', error);
-            alert('Hálózati hiba történt');
+            console.error("Hálózati hiba történt:", error);
+            Swal.fire({
+                title: "Hálózati hiba!",
+                text: "Nem sikerült csatlakozni a szerverhez.",
+                icon: "error",
+                theme: "dark"
+            });
+            // alert("Hálózati hiba történt");
         }
     } else {
-        alert('A törlési művelet megszakítva');
+        Swal.fire({
+            title: "Művelet megszakítva",
+            text: "A termék törlése nem történt meg.",
+            icon: "info",
+            theme: "dark"
+        });
+        // alert("A törlési művelet megszakítva");
     }
 }
 
@@ -393,17 +451,17 @@ span.addEventListener('click', () => {
     modal.style.display = "none";
 });
 
-
 async function fetchCategories() {
     try {
         const res = await fetch('/api/categories', { method: 'GET' });
         const categories = await res.json();
 
         const categorySelect = document.getElementById('category_id');
+        categorySelect.innerHTML = '';
         categories.forEach(category => {
             const option = document.createElement('option');
-            option.value = category.category_id; // category_id érték
-            option.textContent = category.name;  // category neve
+            option.value = category.category_id;
+            option.textContent = category.name;
             categorySelect.appendChild(option);
         });
     } catch (error) {
@@ -411,22 +469,16 @@ async function fetchCategories() {
     }
 }
 
-
 function openEditModal(product) {
-    // Betöltjük a termék adatait a modalba
     document.getElementById('name').value = product.name;
     document.getElementById('price').value = product.price;
     document.getElementById('description').value = product.description || '';
     document.getElementById('stock').value = product.stock || '';
-    document.getElementById('category_id').value = product.category_id || '';  // Kategória ID automatikusan beállítva
+    document.getElementById('category_id').value = product.category_id || '';
     document.getElementById('pic').src = `/uploads/${product.pic}`;
     
-    // Termék ID mentése egy változóba
     currentProductId = product.product_id;
-
-    // Betöltjük a kategóriákat a legördülő listába
     fetchCategories();
-
     modal.style.display = "block";
 }
 
@@ -434,48 +486,46 @@ document.getElementById("editForm").addEventListener("submit", async function(ev
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    formData.append('id', currentProductId); // ID hozzáadása automatikusan
+    formData.append('id', currentProductId);
 
     try {
         const res = await fetch('/api/updateItem', {
             method: 'POST',
             body: formData,
-            credentials: 'include' // Hitelesítési adatok automatikus küldése
+            credentials: 'include'
         });
         
-        console.log('HTTP status:', res.status);
-        
-        let data;
-        try {
-            data = await res.json();
-        } catch (err) {
-            console.error('JSON parsing error:', err);
-            data = { error: 'Nem lehetett beolvasni a választ JSON formátumban' };
-        }
-
-        console.log(data);
+        const data = await res.json();
 
         if (res.ok) {
-            alert('Termék sikeresen frissítve');
-            getProducts(); // Új termék lista betöltése
+            Swal.fire({
+                title: "Termék sikeresen frissítve",
+                icon: "success",
+                theme: "dark"
+            });
+            // alert('Termék sikeresen frissítve');
+            getProducts();
             modal.style.display = "none";
-            // További műveletek, például a termék frissítése a felületen
-        } else if (data.error) {
-            alert(data.error);
         } else {
-            alert('Ismeretlen hiba');
+            Swal.fire({
+                title: data.error || "Ismeretlen hiba",
+                icon: "error",
+                theme: "dark"
+            });
+            // alert(data.error || 'Ismeretlen hiba');
         }
     } catch (error) {
         console.error('Hálózati hiba történt:', error);
-        alert('Hálózati hiba történt');
+        Swal.fire({
+            title: "Hálózati hiba!",
+            icon: "error",
+            theme: "dark"
+        });
+        // alert('Hálózati hiba történt');
     }
 });
 
-
-
-
-
-//termék szerkesztés 2
+// Termék szerkesztés 2
 const modal5 = document.getElementById("editModal5");
 const closeBtn = document.querySelector(".close5");
 let currentProductId4 = null;
@@ -485,46 +535,24 @@ closeBtn.addEventListener("click", () => {
 });
 
 function openEditModal2(product) {
-    document.getElementById('Jelátvitel').value = product.Jelátvitel || '';
-    document.getElementById('Max_működési_idő').value = product.Max_működési_idő || '';
-    document.getElementById('Hordhatósági_változatok').value = product.Hordhatósági_változatok || '';
-    document.getElementById('Termék_típusa').value = product.Termék_típusa || '';
-    document.getElementById('Kivitel').value = product.Kivitel || '';
-    document.getElementById('Bluetooth_verzió').value = product.Bluetooth_verzió || '';
-    document.getElementById('Hangszóró_meghajtók').value = product.Hangszóró_meghajtók || '';
-    document.getElementById('Szín').value = product.Szín || '';
-    document.getElementById('Csatlakozók').value = product.Csatlakozók || '';
-    document.getElementById('Bluetooth').value = product.Bluetooth || '';
-    document.getElementById('Frekvenciaátvitel').value = product.Frekvenciaátvitel || '';
-    document.getElementById('Érzékenység').value = product.Érzékenység || '';
+    ["Jelátvitel", "Max_működési_idő", "Hordhatósági_változatok", "Termék_típusa", "Kivitel", "Bluetooth_verzió", "Hangszóró_meghajtók", "Szín", "Csatlakozók", "Bluetooth", "Frekvenciaátvitel", "Érzékenység"].forEach(field => {
+        document.getElementById(field).value = product[field] || '';
+    });
     
     currentProductId4 = product.product_id;
-    
     modal5.style.display = "block";
 }
 
 document.getElementById("editForm2").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const formData = {
-        Jelátvitel: document.getElementById('Jelátvitel').value,
-        Max_működési_idő: document.getElementById('Max_működési_idő').value,
-        Hordhatósági_változatok: document.getElementById('Hordhatósági_változatok').value,
-        Termék_típusa: document.getElementById('Termék_típusa').value,
-        Kivitel: document.getElementById('Kivitel').value,
-        Bluetooth_verzió: document.getElementById('Bluetooth_verzió').value,
-        Hangszóró_meghajtók: document.getElementById('Hangszóró_meghajtók').value,
-        Szín: document.getElementById('Szín').value,
-        Csatlakozók: document.getElementById('Csatlakozók').value,
-        Bluetooth: document.getElementById('Bluetooth').value,
-        Frekvenciaátvitel: document.getElementById('Frekvenciaátvitel').value,
-        Érzékenység: document.getElementById('Érzékenység').value,
-        id: currentProductId4 // ID hozzárendelése
-    };
+    const formData = {};
+    ["Jelátvitel", "Max_működési_idő", "Hordhatósági_változatok", "Termék_típusa", "Kivitel", "Bluetooth_verzió", "Hangszóró_meghajtók", "Szín", "Csatlakozók", "Bluetooth", "Frekvenciaátvitel", "Érzékenység"].forEach(field => {
+        formData[field] = document.getElementById(field).value;
+    });
+    formData.id = currentProductId4;
 
     try {
-        console.log("Küldött adatok:", formData);
-
         const res = await fetch('/api/updateItemInfo', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
@@ -535,16 +563,32 @@ document.getElementById("editForm2").addEventListener("submit", async function(e
         const data = await res.json();
 
         if (res.ok) {
-            alert('Termék sikeresen frissítve');
+            Swal.fire({
+                title: "Termék sikeresen frissítve",
+                icon: "success",
+                theme: "dark"
+            });
+            // alert('Termék sikeresen frissítve');
             modal5.style.display = "none";
         } else {
-            alert(data.error || 'Ismeretlen hiba');
+            Swal.fire({
+                title: data.error || "Ismeretlen hiba",
+                icon: "error",
+                theme: "dark"
+            });
+            // alert(data.error || 'Ismeretlen hiba');
         }
     } catch (error) {
         console.error('Hálózati hiba:', error);
-        alert('Hálózati hiba történt');
+        Swal.fire({
+            title: "Hálózati hiba!",
+            icon: "error",
+            theme: "dark"
+        });
+        // alert('Hálózati hiba történt');
     }
 });
+
 
 
 
@@ -567,8 +611,6 @@ const span2 = document.getElementsByClassName("close2")[0];
 span2.addEventListener('click', () => {
     modal2.style.display="none";
 });
-
-
 
 // Kategóriák lekérése és betöltése a legördülő listába
 async function fetchCategoriesForAdd() {
@@ -632,38 +674,55 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
         console.log(data);
 
         if (res.ok) {
-            alert('Termék sikeresen hozzáadva');
+            // alert('Termék sikeresen hozzáadva');
+            Swal.fire({
+                title: "Termék sikeresen hozzáadva",
+                icon: "success",
+                theme: 'dark'
+            });
             getProducts(); // Frissítjük a termék listát
             modal2.style.display = "none";
         } else if (data.error) {
-            alert(data.error);
+            // alert(data.error);
+            Swal.fire({
+                title: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
         } else {
-            alert('Ismeretlen hiba');
+            // alert('Ismeretlen hiba');
+            Swal.fire({
+                title: "Ismeretlen hiba",
+                icon: "error",
+                theme: 'dark'
+            });
         }
     } catch (error) {
         console.error('Hálózati hiba történt:', error);
-        alert('Hálózati hiba történt');
+        // alert('Hálózati hiba történt');
+        Swal.fire({
+            title: "Hálózati hiba történt",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 });
 
-//kategoria hozzáadása
 
 const modal3 = document.getElementById("addCategorieModal");
-const add_category= document.getElementsByClassName('add2')[0];
+const add_category = document.getElementsByClassName('add2')[0];
 add_category.addEventListener('click', () => {
     openAddCategoryModal();
 });
 const span3 = document.getElementsByClassName("close3")[0];
 
 span3.addEventListener('click', () => {
-    modal3.style.display="none";
+    modal3.style.display = "none";
 });
-
 
 function openAddCategoryModal() {
     document.getElementById('add_categorie_name').value = '';
     document.getElementById('add_categorie_description').value = '';
-  
 
     // Megjelenítjük a modalt
     const modal = document.getElementById('addCategorieModal');
@@ -690,7 +749,6 @@ document.getElementById("addCategorrieForm").addEventListener("submit", async fu
             credentials: 'include'  // Hitelesítési adatok automatikus küldése
         });
 
-        
         let data;
         try {
             data = await res.json();
@@ -702,20 +760,44 @@ document.getElementById("addCategorrieForm").addEventListener("submit", async fu
         console.log(data);
 
         if (res.ok) {
-            alert('Kategória sikeresen hozzáadva');
-             //getCategories();  // Frissítjük a kategórialistát
+            // alert('Kategória sikeresen hozzáadva');
+            Swal.fire({
+                title: "Kategória sikeresen hozzáadva",
+                icon: "success",
+                theme: 'dark'
+            });
+            
+            // getCategories();  // Frissítjük a kategórialistát
             const modal = document.getElementById('addCategorieModal');
             modal.style.display = "none";  // Bezárjuk a modalt
         } else if (data.error) {
-            alert(data.error);
+            // alert(data.error);
+            Swal.fire({
+                title: "Hiba",
+                text: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
         } else {
-            alert('Ismeretlen hiba');
+            // alert('Ismeretlen hiba');
+            Swal.fire({
+                title: "Ismeretlen hiba",
+                icon: "warning",
+                theme: 'dark'
+            });
         }
     } catch (error) {
         console.error('Hálózati hiba történt:', error);
-        alert('Hálózati hiba történt');
+        // alert('Hálózati hiba történt');
+        Swal.fire({
+            title: "Hálózati hiba",
+            text: "Nem sikerült csatlakozni a szerverhez.",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 });
+
 
 
 
@@ -755,25 +837,55 @@ document.getElementById("addForm").addEventListener("submit", async function(eve
         console.log(data);
 
         if (res.ok) {
-            alert('Termék sikeresen hozzáadva');
+            // Kommentelt alert
+            // alert('Termék sikeresen hozzáadva');
+            
+            Swal.fire({
+                title: "Termék sikeresen hozzáadva",
+                icon: "success",
+                theme: 'dark'
+            });
+
             getProducts();  // Frissítjük a terméklistát
             const modal = document.getElementById('addModal');
             modal.style.display = "none";  // Bezárjuk a modalt
             // További műveletek, például a termék hozzáadása a felülethez
         } else if (data.error) {
-            alert(data.error);
+            // Kommentelt alert
+            // alert(data.error);
+            
+            Swal.fire({
+                title: "Hiba történt",
+                text: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
         } else {
-            alert('Ismeretlen hiba');
+            // Kommentelt alert
+            // alert('Ismeretlen hiba');
+            
+            Swal.fire({
+                title: "Ismeretlen hiba",
+                icon: "error",
+                theme: 'dark'
+            });
         }
     } catch (error) {
         console.error('Hálózati hiba történt:', error);
-        alert('Hálózati hiba történt');
+        
+        // Kommentelt alert
+        // alert('Hálózati hiba történt');
+        
+        Swal.fire({
+            title: "Hálózati hiba történt",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 });
 
 
 
-//kategoriak
 async function getCategories() {
     const res = await fetch('/api/categories', {
         method: 'GET',
@@ -814,8 +926,30 @@ function renderCategories(categories) {
         deleteButton.classList.add('delete');
         deleteButton.textContent = 'Törlés';
         deleteButton.addEventListener('click', async () => {
-            if (confirm('Biztosan törölni szeretnéd ezt a kategóriát?')) {
+            // Kommentált figyelmeztetés:
+            // if (confirm('Biztosan törölni szeretnéd ezt a kategóriát?')) {
+            //     await deleteCategory(category.category_id);
+            // }
+
+            // SweetAlert figyelmeztetés:
+            const result = await Swal.fire({
+                title: 'Biztosan törölni szeretnéd ezt a kategóriát?',
+                text: "Ez a művelet visszafordíthatatlan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Igen',
+                cancelButtonText: 'Mégse',
+                reverseButtons: true,
+                theme: 'dark'
+            });
+
+            if (result.isConfirmed) {
                 await deleteCategory(category.category_id);
+                Swal.fire({
+                    title: "Kategória sikeresen törölve",
+                    icon: "success",
+                    theme: 'dark'
+                });
             }
         });
 
@@ -841,19 +975,41 @@ async function deleteCategory(categoryId) {
         console.log(data);
 
         if (res.ok) {
-            alert('Kategória sikeresen törölve');
+            // SweetAlert használata a sikeres törléshez
+            Swal.fire({
+                title: "Kategória sikeresen törölve",
+                icon: "success",
+                theme: 'dark'
+            });
+
+            // A meglévő alert kommentált változata
+            // alert('Kategória sikeresen törölve');
+            
             getCategories(); // Frissítjük a listát
         } else {
-            alert(data.error || 'Hiba történt a törlés során');
+            // SweetAlert használata a hibás törléshez
+            Swal.fire({
+                title: data.error || 'Hiba történt a törlés során',
+                icon: "error",
+                theme: 'dark'
+            });
+
+            // A meglévő alert kommentált változata
+            // alert(data.error || 'Hiba történt a törlés során');
         }
     } catch (error) {
         console.error('Hálózati hiba:', error);
-        alert('Hálózati hiba történt');
+        // SweetAlert használata a hálózati hiba kezelésére
+        Swal.fire({
+            title: "Hálózati hiba történt",
+            icon: "error",
+            theme: 'dark'
+        });
+
+        // A meglévő alert kommentált változata
+        // alert('Hálózati hiba történt');
     }
 }
-
-
-
 
 const modal4 = document.getElementById("editCategorieModal");
 const span4 = document.getElementsByClassName("close4")[0];
@@ -868,7 +1024,11 @@ function openEditCategoryModal(category) {
 
     if (typeof category !== "object" || category === null) {
         console.error("Hibás vagy hiányzó kategória adatok:", category);
-        alert("Hiba: A kategória adatai nem érhetők el.");
+        Swal.fire({
+            title: "Hiba: A kategória adatai nem érhetők el.",
+            icon: "error",
+            theme: 'dark'
+        });
         return;
     }
     console.log(category.name, category.description);
@@ -883,7 +1043,6 @@ function openEditCategoryModal(category) {
 
     modal4.style.display = "block";
 }
-
 
 document.getElementById("editCategorrieForm").addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -903,9 +1062,9 @@ document.getElementById("editCategorrieForm").addEventListener("submit", async f
             body: JSON.stringify({ cat_id, edit_categorie_name, edit_categorie_description }),
             credentials: 'include' // Hitelesítési adatok automatikus küldése
         });
-        
+
         console.log('HTTP status:', res.status);
-        
+
         let data;
         try {
             data = await res.json();
@@ -917,17 +1076,50 @@ document.getElementById("editCategorrieForm").addEventListener("submit", async f
         console.log(data);
 
         if (res.ok) {
-            alert('Kategória sikeresen frissítve');
+            // SweetAlert használata a sikeres frissítéshez
+            Swal.fire({
+                title: "Kategória sikeresen frissítve",
+                icon: "success",
+                theme: 'dark'
+            });
+
+            // A meglévő alert kommentált változata
+            // alert('Kategória sikeresen frissítve');
+            
             getCategories(); // Frissítjük a kategóriák listáját
             modal4.style.display = "none";
             // További műveletek, például a kategória frissítése a felületen
         } else if (data.error) {
-            alert(data.error);
+            // SweetAlert használata a hibaüzenethez
+            Swal.fire({
+                title: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
+
+            // A meglévő alert kommentált változata
+            // alert(data.error);
         } else {
-            alert('Ismeretlen hiba');
+            // SweetAlert használata az ismeretlen hiba kezelésére
+            Swal.fire({
+                title: "Ismeretlen hiba történt",
+                icon: "error",
+                theme: 'dark'
+            });
+
+            // A meglévő alert kommentált változata
+            // alert('Ismeretlen hiba');
         }
     } catch (error) {
         console.error('Hálózati hiba történt:', error);
-        alert('Hálózati hiba történt');
+        // SweetAlert használata a hálózati hiba kezelésére
+        Swal.fire({
+            title: "Hálózati hiba történt",
+            icon: "error",
+            theme: 'dark'
+        });
+
+        // A meglévő alert kommentált változata
+        // alert('Hálózati hiba történt');
     }
 });
