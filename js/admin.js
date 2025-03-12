@@ -20,7 +20,7 @@ async function logout(){
         //alert(data.message);
         Swal.fire({
             text: data.message,
-            theme: dark
+            theme: 'dark'
 
           });        window.location.href='../index.html';
     }else{
@@ -29,7 +29,7 @@ async function logout(){
             icon: "error",
             title: "Oops...",
             text: "Hiba a kijelentkezéskor!",
-            theme: dark
+            theme: 'dark'
 
           });
     }
@@ -157,20 +157,20 @@ async function deleteUser(userId) {
                 Swal.fire({
                     title: "Felhasználó sikeresen törölve",
                     icon: "success",
-                    theme: dark
+                    theme: 'dark'
                 });
                 getUsers();
             } else if (data.error) {
                 Swal.fire({
                     title: data.error,
                     icon: "error",
-                    theme: dark
+                    theme: 'dark'
                 });
             } else {
                 Swal.fire({
                     title: "Ismeretlen hiba",
                     icon: "error",
-                    theme: dark
+                    theme: 'dark'
                 });
             }
         } catch (error) {
@@ -178,14 +178,14 @@ async function deleteUser(userId) {
             Swal.fire({
                 title: "Hálózati hiba történt",
                 icon: "error",
-                theme: dark
+                theme: 'dark'
             });
         }
     } else {
         Swal.fire({
             title: "A törlési művelet megszakítva",
             icon: "info",
-            theme: dark
+            theme: 'dark'
         });
     }
 }
