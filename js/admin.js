@@ -127,8 +127,8 @@ async function deleteUser(userId) {
         cancelButtonColor: "#3085d6",
         confirmButtonText: "Igen, törlöm!",
         cancelButtonText: "Mégse",
-        theme: dark
-    });
+        theme: 'dark'
+        });
 
     if (result.isConfirmed) {
         try {
