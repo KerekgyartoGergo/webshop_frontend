@@ -111,17 +111,17 @@ function renderUsers(users) {
 }
 
 
-// Felhasználó törlése
+//felhasználó törlése
 async function deleteUser(userId) {
     const result = await Swal.fire({
-        title: 'Biztosan törölni akarod a felhasználót?',
-        text: "A művelet nem visszavonható!",
-        icon: 'warning',
+        title: "Biztosan törölni akarod a felhasználót?",
+        text: "Ez a művelet nem vonható vissza!",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Igen, törlöm!',
-        cancelButtonText: 'Mégse'
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Igen, törlöm!",
+        cancelButtonText: "Mégse"
     });
 
     if (result.isConfirmed) {
@@ -135,15 +135,12 @@ async function deleteUser(userId) {
                 credentials: 'include' // Hitelesítési adatok automatikus küldése
             });
 
-            // Naplózás a válasz előtt
             console.log('HTTP status:', res.status);
             
-            // Megpróbáljuk beolvasni a válasz adatokat JSON formátumban
             let data;
             try {
                 data = await res.json();
             } catch (err) {
-                // Ha a JSON parsing hibát okoz, naplózunk és feltételezhetjük, hogy a válasz nem JSON formátumú
                 console.error('JSON parsing error:', err);
                 data = { error: 'Nem lehetett beolvasni a választ JSON formátumban' };
             }
@@ -156,7 +153,6 @@ async function deleteUser(userId) {
                     icon: "success"
                 });
                 getUsers();
-                // További műveletek, például a felhasználó eltávolítása a felületről
             } else if (data.error) {
                 Swal.fire({
                     title: data.error,
