@@ -16,9 +16,18 @@ async function logout(){
 
     if(res.ok){
         alert(data.message);
+        Swal.fire({
+            title: data.message,
+            theme: 'dark'
+        });
         window.location.href='../index.html';
     }else{
         alert('Hiba a kijelentkezéskor!')
+        Swal.fire({
+            title: "Hiba a kijelentkezéskor!",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
 
@@ -137,14 +146,28 @@ function renderOrders(orders) {
             .then(data => {
                 if (data.success) {
                     alert('A rendelés státusza sikeresen frissítve!');
+                    Swal.fire({
+                        title: "A rendelés státusza sikeresen frissítve!",
+                        icon: "success",
+                        theme: 'dark'
+                    });
                     getOrders();
                 } else {
                     alert('Hiba a státusz frissítése közben');
-                }
+                    Swal.fire({
+                        title: "Hiba a státusz frissítése közben",
+                        icon: "error",
+                        theme: 'dark'
+                    });                }
             })
             .catch(error => {
                 console.error('Hiba történt:', error);
                 alert('Hiba történt a rendelés frissítése közben');
+                Swal.fire({
+                    title: "Hiba történt a rendelés frissítése közben",
+                    icon: "error",
+                    theme: 'dark'
+                });
             });
         });
 
