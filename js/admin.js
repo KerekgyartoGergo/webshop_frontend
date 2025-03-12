@@ -18,14 +18,19 @@ async function logout(){
 
     if(res.ok){
         //alert(data.message);
-        Swal.fire(data.message);
-        window.location.href='../index.html';
+        Swal.fire({
+            text: data.message,
+            theme: dark
+
+          });        window.location.href='../index.html';
     }else{
         //alert('Hiba a kijelentkezéskor!')
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Hiba a kijelentkezéskor!"
+            text: "Hiba a kijelentkezéskor!",
+            theme: dark
+
           });
     }
 }
@@ -121,7 +126,8 @@ async function deleteUser(userId) {
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
         confirmButtonText: "Igen, törlöm!",
-        cancelButtonText: "Mégse"
+        cancelButtonText: "Mégse",
+        theme: dark
     });
 
     if (result.isConfirmed) {
@@ -150,31 +156,36 @@ async function deleteUser(userId) {
             if (res.ok) {
                 Swal.fire({
                     title: "Felhasználó sikeresen törölve",
-                    icon: "success"
+                    icon: "success",
+                    theme: dark
                 });
                 getUsers();
             } else if (data.error) {
                 Swal.fire({
                     title: data.error,
-                    icon: "error"
+                    icon: "error",
+                    theme: dark
                 });
             } else {
                 Swal.fire({
                     title: "Ismeretlen hiba",
-                    icon: "error"
+                    icon: "error",
+                    theme: dark
                 });
             }
         } catch (error) {
             console.error('Hálózati hiba történt:', error);
             Swal.fire({
                 title: "Hálózati hiba történt",
-                icon: "error"
+                icon: "error",
+                theme: dark
             });
         }
     } else {
         Swal.fire({
             title: "A törlési művelet megszakítva",
-            icon: "info"
+            icon: "info",
+            theme: dark
         });
     }
 }
