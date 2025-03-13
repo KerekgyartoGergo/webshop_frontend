@@ -36,6 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 addToCart(product_id2); // A termék azonosító átadása a függvénynek
             } else {
                 alert('Hiba: A termék azonosítója nem található.');
+                Swal.fire({
+                    title: "Hiba",
+                    text:"A termék azonosítója nem található.",
+                    icon: "error",
+                    theme: 'dark'
+                });
             }
         });
     }
@@ -204,10 +210,21 @@ async function logout() {
     const data = await res.json();
 
     if (res.ok) {
-        alert(data.message);
-        window.location.href = '../index.html';
+        // alert(data.message);
+        Swal.fire({
+            title: data.message,
+            icon: "success",
+            theme: 'dark'
+        }).then(() => {
+            window.location.href = '../index.html';
+        });
     } else {
-        alert('Hiba a kijelentkezéskor!')
+        // alert('Hiba a kijelentkezéskor!');
+        Swal.fire({
+            title: "Hiba a kijelentkezéskor!",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
 
@@ -242,6 +259,11 @@ async function addToCart(product_id, quantity = 1) {
         });
     } catch (error) {
         console.error('Hiba a kosárhoz adás során:', error);
-        alert(error.message);
+        //alert(error.message);
+        Swal.fire({
+            title: error.message,
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
