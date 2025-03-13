@@ -1,5 +1,5 @@
-const btnLogout = document.getElementsByClassName('icon-logout')[0];
-const btnProfile = document.getElementsByClassName('icon-user')[0];
+const btnLogout =document.getElementsByClassName('icon-logout')[0];
+const btnProfile =document.getElementsByClassName('icon-user')[0];
 const btnMenuLogo = document.getElementsByClassName('menu-logo')[0];
 const btnFolytatas = document.getElementsByClassName('continue-btn')[0];
 
@@ -8,17 +8,24 @@ window.addEventListener('DOMContentLoaded', getCartTotal);
 
 btnLogout.addEventListener('click', logout);
 
-btnMenuLogo.addEventListener('click', () => {
-    window.location.href = '../home.html';
+
+
+btnMenuLogo.addEventListener('click', ()=>{
+    window.location.href='../home.html';
 });
 
-btnFolytatas.addEventListener('click', () => {
-    window.location.href = '../checkout.html';
+btnFolytatas.addEventListener('click', ()=>{
+    window.location.href='../checkout.html';
 });
 
-btnProfile.addEventListener('click', () => {
-    window.location.href = '../profile.html';
+btnProfile.addEventListener('click', ()=>{
+    window.location.href='../profile.html';
 });
+
+
+
+
+
 
 async function getCartItems() {
     const res = await fetch('/api/getCartItems', {
@@ -82,30 +89,7 @@ function renderCartItems(cartItems) {
         const deleteButton = document.createElement('button');
         deleteButton.classList.add('card-delete');
         deleteButton.textContent = 'Törlés';
-        deleteButton.addEventListener('click', async () => {
-            // SweetAlert törlés előtti megerősítés
-            const result = await Swal.fire({
-                title: 'Biztosan törölni szeretnéd a terméket?',
-                text: "Ez a művelet nem visszavonható!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Igen, törlés!',
-                cancelButtonText: 'Mégse',
-                reverseButtons: true
-            });
-
-            if (result.isConfirmed) {
-                // Ha megerősítette a törlést, folytatjuk a törlés logikáját
-                deleteItemFromCart(item.product_id);
-
-                // SweetAlert sikeres törlés értesítés
-                Swal.fire({
-                    title: 'A termék sikeresen törölve!',
-                    icon: 'success',
-                    theme: 'dark'
-                });
-            }
-        });
+        deleteButton.addEventListener('click', () => deleteItemFromCart(item.product_id));
 
         cardActions.append(cardPrice, quantityInput, deleteButton);
 
@@ -130,92 +114,101 @@ function updateCartItem(productId, newQuantity) {
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            // alert(data.error); // Kommentelve, hogy ne zavarja a SweetAlert
+            // alert(data.error);
             Swal.fire({
-                title: data.error,
-                icon: 'error',
+                title: "Hiba",
+                text: data.error,
+                icon: "error",
                 theme: 'dark'
             });
         } else {
             console.log('Mennyiség frissítve:', data);
 
             getCartTotal(); // Új végösszeg lekérése
-
             getCartItems();
         }
     })
     .catch(error => {
-        // console.error('Hiba a frissítés közben:', error); // Kommentelve, hogy ne zavarja a SweetAlert
+        console.error('Hiba a frissítés közben:', error);
         Swal.fire({
-            title: 'Hiba a frissítés közben',
-            text: error.message,
-            icon: 'error',
+            title: "Hálózati hiba",
+            text: "Hiba történt a frissítés közben.",
+            icon: "error",
             theme: 'dark'
         });
     });
 }
 
 async function deleteItemFromCart(productId) {
-    if (confirm('Biztosan törölni akarod a terméket a kosárból?')) {
+    const confirmDelete = await Swal.fire({
+        title: "Biztosan törölni akarod?",
+        text: "Ez a művelet nem vonható vissza!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Igen, törlöm",
+        cancelButtonText: "Mégse",
+        theme: 'dark'
+    });
+
+    if (confirmDelete.isConfirmed) {
         try {
             const res = await fetch('/api/deleteCart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ product_id: productId }), // A törlendő termék
+                body: JSON.stringify({ product_id: productId }),
                 credentials: 'include'
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                // alert('Termék sikeresen törölve a kosárból'); // Kommentelve, hogy ne zavarja a SweetAlert
+                // alert('Termék sikeresen törölve a kosárból');
                 Swal.fire({
-                    title: 'Termék sikeresen törölve a kosárból',
-                    icon: 'success',
+                    title: "Termék törölve",
+                    text: "A termék sikeresen törölve lett a kosárból.",
+                    icon: "success",
                     theme: 'dark'
                 });
-
-                // Frissítjük a kosár tartalmát közvetlenül a DOM-ban
                 renderCartItems(data.cartItems);  // Közvetlenül újrarendereljük a kosarat
                 getCartTotal(); // Új végösszeg lekérése
             } else if (data.error) {
-                // alert(data.error); // Kommentelve, hogy ne zavarja a SweetAlert
+                // alert(data.error);
                 Swal.fire({
-                    title: data.error,
-                    icon: 'error',
+                    title: "Hiba",
+                    text: data.error,
+                    icon: "error",
                     theme: 'dark'
                 });
             } else {
-                // alert('Ismeretlen hiba történt'); // Kommentelve, hogy ne zavarja a SweetAlert
+                // alert('Ismeretlen hiba történt');
                 Swal.fire({
-                    title: 'Ismeretlen hiba történt',
-                    icon: 'error',
+                    title: "Ismeretlen hiba",
+                    text: "Valami hiba történt, próbáld újra.",
+                    icon: "error",
                     theme: 'dark'
                 });
             }
         } catch (error) {
-            // console.error('Hálózati hiba történt:', error); // Kommentelve, hogy ne zavarja a SweetAlert
+            console.error('Hálózati hiba történt:', error);
             Swal.fire({
-                title: 'Hálózati hiba történt',
-                text: error.message,
-                icon: 'error',
+                title: "Hálózati hiba",
+                text: "Nem sikerült kapcsolódni a szerverhez.",
+                icon: "error",
                 theme: 'dark'
             });
         }
     } else {
-        // alert('A törlési művelet megszakítva'); // Kommentelve, hogy ne zavarja a SweetAlert
+        // alert('A törlési művelet megszakítva');
         Swal.fire({
-            title: 'A törlési művelet megszakítva',
-            icon: 'info',
+            title: "Művelet megszakítva",
+            text: "A törlési művelet nem lett végrehajtva.",
+            icon: "info",
             theme: 'dark'
         });
     }
 }
-
-
-
 
 
 
@@ -242,120 +235,104 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-async function logout(){
-    const res =await fetch('/api/logout',{
-        method:'POST',
+async function logout() {
+    const res = await fetch('/api/logout', {
+        method: 'POST',
         credentials: 'include'
     });
 
-    const data =await res.json();
+    const data = await res.json();
 
-    if(res.ok){
-        // Commented out original alert
+    if (res.ok) {
         // alert(data.message);
-
-        // SweetAlert version
         Swal.fire({
-            title: data.message,  // Use the message from the response
+            title: data.message,
             icon: "success",
             theme: 'dark'
+        }).then(() => {
+            window.location.href = '../index.html';
         });
-
-        window.location.href='../index.html';
-    }else{
-        // Commented out original alert
+    } else {
         // alert('Hiba a kijelentkezéskor!');
-
-        // SweetAlert version for error
         Swal.fire({
-            title: 'Hiba a kijelentkezéskor!',
-            icon: 'error',
+            title: "Hiba a kijelentkezéskor!",
+            icon: "error",
             theme: 'dark'
         });
     }
 }
 
-
-
-
-
-// termék törlését a kosárból
 async function deleteItemFromCart(productId) {
-    // Kommentáltuk a régi alertet és confirmot, hogy helyette SweetAlert-tel dolgozzunk.
-    // if (confirm('Biztosan törölni akarod a terméket a kosárból?')) {
-    Swal.fire({
-        title: 'Biztosan törölni akarod a terméket a kosárból?',
-        icon: 'warning',
+    if (await Swal.fire({
+        title: "Biztosan törölni akarod a terméket a kosárból?",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonText: 'Igen, törlöm',
-        cancelButtonText: 'Mégse',
-        reverseButtons: true,
+        confirmButtonText: "Igen, törlöm",
+        cancelButtonText: "Mégse",
         theme: 'dark'
-    }).then(async (result) => {
-        if (result.isConfirmed) {
+    }).then(result => result.isConfirmed)) {
+        try {
+            const res = await fetch('/api/deleteCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ product_id: productId, quantity: 1 }),
+                credentials: 'include'
+            });
+
+            let data;
             try {
-                const res = await fetch('/api/deleteCart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ product_id: productId, quantity: 1 }), // A törlendő termék és mennyiség
-                    credentials: 'include' // Hitelesítési adatok automatikus küldése (ha szükséges)
-                });
+                data = await res.json();
+            } catch (err) {
+                console.error('JSON parsing error:', err);
+                data = { error: 'Nem lehetett beolvasni a választ JSON formátumban' };
+            }
 
-                // Válasz adatainak beolvasása JSON formátumban
-                let data;
-                try {
-                    data = await res.json();
-                } catch (err) {
-                    // Ha a JSON parsing hiba, naplózunk
-                    console.error('JSON parsing error:', err);
-                    data = { error: 'Nem lehetett beolvasni a választ JSON formátumban' };
-                }
+            console.log(data);
 
-                console.log(data);
-
-                if (res.ok) {
-                    Swal.fire({
-                        title: "Termék sikeresen törölve a kosárból",
-                        icon: "success",
-                        theme: 'dark'
-                    });
-                    // Itt hívhatod a kosár frissítésére szolgáló funkciót, ha szükséges
-                    window.location.reload();
-                    getProducts(); // Feltételezem, hogy van egy getProducts függvény a kosár frissítésére
-                } else if (data.error) {
-                    Swal.fire({
-                        title: data.error,
-                        icon: "error",
-                        theme: 'dark'
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Ismeretlen hiba történt',
-                        icon: 'error',
-                        theme: 'dark'
-                    });
-                }
-            } catch (error) {
-                console.error('Hálózati hiba történt:', error);
+            if (res.ok) {
+                // alert('Termék sikeresen törölve a kosárból');
                 Swal.fire({
-                    title: 'Hálózati hiba történt',
-                    icon: 'error',
+                    title: "Termék sikeresen törölve a kosárból",
+                    icon: "success",
+                    theme: 'dark'
+                }).then(() => {
+                    window.location.reload();
+                    getProducts();
+                });
+            } else if (data.error) {
+                // alert(data.error);
+                Swal.fire({
+                    title: data.error,
+                    icon: "error",
+                    theme: 'dark'
+                });
+            } else {
+                // alert('Ismeretlen hiba történt');
+                Swal.fire({
+                    title: "Ismeretlen hiba történt",
+                    icon: "error",
                     theme: 'dark'
                 });
             }
-        } else {
+        } catch (error) {
+            console.error('Hálózati hiba történt:', error);
+            // alert('Hálózati hiba történt');
             Swal.fire({
-                title: 'A törlési művelet megszakítva',
-                icon: 'info',
+                title: "Hálózati hiba történt",
+                icon: "error",
                 theme: 'dark'
             });
         }
-    });
-    // } else {
-    //     alert('A törlési művelet megszakítva');
-    // }
+    } else {
+        // alert('A törlési művelet megszakítva');
+        Swal.fire({
+            title: "A törlési művelet megszakítva",
+            icon: "info",
+            theme: 'dark'
+        });
+    }
 }
 
 
