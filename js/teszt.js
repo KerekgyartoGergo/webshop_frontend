@@ -247,7 +247,7 @@ async function addToCart(product_id, quantity = 1) {
         }
 
         // Displaying success message with product price
-        const message = `${data.message} - Ár: ${data.price} Ft`;
+        const message = `${data.message}`;
 
         Swal.fire({
             position: "center",
