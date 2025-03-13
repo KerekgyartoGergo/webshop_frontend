@@ -31,18 +31,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-async function logout(){
-    const res =await fetch('/api/logout',{
-        method:'POST',
+async function logout() {
+    const res = await fetch('/api/logout', {
+        method: 'POST',
         credentials: 'include'
     });
 
-    const data =await res.json();
+    const data = await res.json();
 
-    if(res.ok){
-        alert(data.message);
-        window.location.href='../index.html';
-    }else{
-        alert('Hiba a kijelentkezéskor!')
+    if (res.ok) {
+        // alert(data.message);
+        Swal.fire({
+            title: data.message,
+            icon: "success",
+            theme: 'dark'
+        }).then(() => {
+            window.location.href = '../index.html';
+        });
+    } else {
+        // alert('Hiba a kijelentkezéskor!');
+        Swal.fire({
+            title: "Hiba a kijelentkezéskor!",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
