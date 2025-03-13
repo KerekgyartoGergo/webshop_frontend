@@ -33,7 +33,12 @@ document.getElementById("saveName").addEventListener("click", function() {
 
     // Ellenőrzés, hogy van-e név a bemenetben
     if (!name) {
-        alert("Kérlek, add meg az új nevet!");
+        // alert("Kérlek, add meg az új nevet!");
+        Swal.fire({
+            title: "Kérlek, add meg az új nevet!",
+            icon: "warning",
+            theme: 'dark'
+        });
         return;
     }
 
@@ -52,14 +57,29 @@ document.getElementById("saveName").addEventListener("click", function() {
     .then(response => response.json())
     .then(data => {
         if (data.message) {
-            alert(data.message); // Sikeres üzenet
+            // alert(data.message); // Sikeres üzenet
+            Swal.fire({
+                title: data.message,
+                icon: "success",
+                theme: 'dark'
+            });
         } else if (data.error) {
-            alert(data.error); // Hibás üzenet
+            // alert(data.error); // Hibás üzenet
+            Swal.fire({
+                title: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
         }
     })
     .catch(error => {
         console.error('Hiba történt:', error);
-        alert('Hiba történt a név módosítása közben.');
+        // alert('Hiba történt a név módosítása közben.');
+        Swal.fire({
+            title: "Hiba történt a név módosítása közben.",
+            icon: "error",
+            theme: 'dark'
+        });
     });
 });
 
@@ -73,12 +93,22 @@ document.getElementById('savePassword').addEventListener('click', function() {
     const confirmPassword = document.getElementById('confirmPasswordInput').value;
 
     if (password === '' || confirmPassword === '') {
-        alert('Kérjük, töltsd ki mindkét jelszó mezőt!');
+        // alert('Kérjük, töltsd ki mindkét jelszó mezőt!');
+        Swal.fire({
+            title: "Kérjük, töltsd ki mindkét jelszó mezőt!",
+            icon: "warning",
+            theme: 'dark'
+        });
         return;
     }
 
     if (password !== confirmPassword) {
-        alert('A jelszavak nem egyeznek!');
+        // alert('A jelszavak nem egyeznek!');
+        Swal.fire({
+            title: "A jelszavak nem egyeznek!",
+            icon: "error",
+            theme: 'dark'
+        });
         return;
     }
 
@@ -93,22 +123,35 @@ document.getElementById('savePassword').addEventListener('click', function() {
             'Content-Type': 'application/json',
         },
         credentials: 'include',
-
-
         body: JSON.stringify(data),
     })
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            alert(data.error);
+            // alert(data.error);
+            Swal.fire({
+                title: data.error,
+                icon: "error",
+                theme: 'dark'
+            });
         } else {
-            alert(data.message);
+            // alert(data.message);
+            Swal.fire({
+                title: data.message,
+                icon: "success",
+                theme: 'dark'
+            });
             logout();
-                }
+        }
     })
     .catch(error => {
         console.error('Hiba történt:', error);
-        alert('Hiba történt a jelszó módosítása során.');
+        // alert('Hiba történt a jelszó módosítása során.');
+        Swal.fire({
+            title: "Hiba történt a jelszó módosítása során.",
+            icon: "error",
+            theme: 'dark'
+        });
     });
 });
 
@@ -120,19 +163,30 @@ document.getElementById('savePassword').addEventListener('click', function() {
 
 
 
-async function logout(){
-    const res =await fetch('/api/logout',{
-        method:'POST',
+async function logout() {
+    const res = await fetch('/api/logout', {
+        method: 'POST',
         credentials: 'include'
     });
 
-    const data =await res.json();
+    const data = await res.json();
 
-    if(res.ok){
-        alert(data.message);
-        window.location.href='../index.html';
-    }else{
-        alert('Hiba a kijelentkezéskor!')
+    if (res.ok) {
+        // alert(data.message);
+        Swal.fire({
+            title: data.message,
+            icon: "success",
+            theme: 'dark'
+        }).then(() => {
+            window.location.href = '../index.html';
+        });
+    } else {
+        // alert('Hiba a kijelentkezéskor!');
+        Swal.fire({
+            title: "Hiba a kijelentkezéskor!",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
 
