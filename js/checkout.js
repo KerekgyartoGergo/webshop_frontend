@@ -33,10 +33,21 @@ async function logout() {
     const data = await res.json();
 
     if (res.ok) {
-        alert(data.message);
-        window.location.href = '../index.html';
+        // alert(data.message);
+        Swal.fire({
+            title: data.message,
+            icon: "success",
+            theme: 'dark'
+        }).then(() => {
+            window.location.href = '../index.html';
+        });
     } else {
-        alert('Hiba a kijelentkezéskor!')
+        // alert('Hiba a kijelentkezéskor!');
+        Swal.fire({
+            title: "Hiba a kijelentkezéskor!",
+            icon: "error",
+            theme: 'dark'
+        });
     }
 }
   
@@ -163,7 +174,12 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
 
     // Form adatainak validálása
     if (!phone || !iranyitoszam || !varos || !cim) {
-        alert("Minden mezőt ki kell tölteni!");
+        // alert("Minden mezőt ki kell tölteni!");
+        Swal.fire({
+            title: "Minden mezőt ki kell tölteni!",
+            icon: "warning",
+            theme: 'dark'
+        });
         return;
     }
 
@@ -187,18 +203,42 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
         if (data.error) {
             // Ha nincs elég készlet, akkor a details mezőt használjuk az alerthez
             if (data.details) {
-                alert(`Nincs elegendő készlet az alábbi termékekből:\n\n${data.details}`);
+                // alert(`Nincs elegendő készlet az alábbi termékekből:\n\n${data.details}`);
+                Swal.fire({
+                    title: "Nincs elegendő készlet!",
+                    text: `Az alábbi termékekből nincs elegendő:\n\n${data.details}`,
+                    icon: "error",
+                    theme: 'dark'
+                });
             } else {
-                alert(data.error);
+                // alert(data.error);
+                Swal.fire({
+                    title: "Hiba!",
+                    text: data.error,
+                    icon: "error",
+                    theme: 'dark'
+                });
             }
         } else {
-            alert('✅ Rendelés sikeresen leadva!');
-            // Opcionálisan átirányíthatjuk a felhasználót a rendelés részletező oldalra
-             window.location.href = '../home.html';
+            // alert('✅ Rendelés sikeresen leadva!');
+            Swal.fire({
+                title: "✅ Rendelés sikeresen leadva!",
+                icon: "success",
+                theme: 'dark'
+            }).then(() => {
+                // Opcionálisan átirányíthatjuk a felhasználót a rendelés részletező oldalra
+                window.location.href = '../home.html';
+            });
         }
     })
     .catch(error => {
         console.error('Hiba történt a rendelés leadásakor:', error);
-        alert('Hiba történt a rendelés leadásakor!');
+        // alert('Hiba történt a rendelés leadásakor!');
+        Swal.fire({
+            title: "Hiba történt!",
+            text: "Nem sikerült leadni a rendelést.",
+            icon: "error",
+            theme: 'dark'
+        });
     });
 });
