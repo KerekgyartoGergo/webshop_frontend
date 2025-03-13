@@ -64,11 +64,11 @@ async function login() {
             theme:"dark"
           });
     } else {
-        alert('Ismeretlen hiba');
+        //alert('Ismeretlen hiba');
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!"
+            text: "Ismeretlen hiba"
           });
     }
 }
