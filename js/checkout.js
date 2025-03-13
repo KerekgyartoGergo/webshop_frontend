@@ -222,7 +222,7 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
         } else {
             // alert('✅ Rendelés sikeresen leadva!');
             Swal.fire({
-                title: "✅ Rendelés sikeresen leadva!",
+                title: "Rendelés sikeresen leadva!",
                 icon: "success",
                 theme: 'dark'
             }).then(() => {
