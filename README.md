@@ -3,11 +3,20 @@ A SoundWavet közösen Kerékgyártó Gergőval csináltuk, a cél az volt hogy 
 
 A Soundwave egy lendületes és megbízható webshop, amely a minőségi hangzás szerelmeseit szolgálja ki. Legyen szó otthoni zenehallgatásról, stúdiófelvételekről vagy élő előadásokról, nálunk megtalálod a legjobb mikrofonokat, hangfalakat, fejhallgatókat és egyéb profi hangeszközöket. Válogatott kínálat, szakértői tanácsadás és szenvedély a hang iránt – a Soundwave-nél minden arról szól, hogy a hang élménnyé váljon. Fedezd fel a hullámokat, és találd meg a saját ritmusod!
 Az oldalt itt tudod elérni --> https://soundwave2.netlify.app/index.html
+
+## Készítette
+- Kerékgyártó Gergő (Backend, SQL adatbázis, Frontend)
+- Kovács Ákos (Frontend, SQL adatbázis)
+- [GitHub repo (backend)](https://github.com/KerekgyartoGergo/webshop_backend.git)
+- [GitHub repo (frontend)](https://github.com/KerekgyartoGergo/webshop_frontend.git)
+
+
+
 # Tartalomjegyzék
 
 ## `Index.html` 
 - **Itt betudsz lépni és regisztrálni:**:
-![Index]()
+![Index](https://snipboard.io/tqmPST.jpg)
 
 
 ### Home az az a fő oldal amiről több különböző oldalra tudunk navigálni:
@@ -30,12 +39,16 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
 ## `Registration.html`/`Login.html` (Regisztráció/Bejelentkezés) 
 - **Új felhasználók regisztrációja:**:
     - Név, email és jelszó
-![Regisztráció]()
-![Bejelentkezés]()
+ 
+      
+![Regisztráció](https://snipboard.io/IrgKVk.jpg)
+![Bejelentkezés](https://snipboard.io/47dqKP.jpg)
 
 ## `Profile.html` (Profil) 
 - **Regisztrált felhasználók számára**:
     - Név, és jelszó megváltoztatása
+ 
+      ![Profil](https://snipboard.io/eXnjPp.jpg)
 
 ## `Kategoria.html` (Kategóriák) 
 - **Három kategória között tudsz választani**:
@@ -53,7 +66,7 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
     -Utca
     -Fizetési mód
     -Telefonszám
-![Pénztár]()
+![Pénztár](https://snipboard.io/nBozeX.jpg)
 
 ## `Admin.html` (Admin)
 - **Az admin felület**:
@@ -63,4 +76,11 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
 - Új termék és Kategória hozzáadása
 
 ![Admin]()
-  
+
+
+## `AdminOrders.html` (Rendelések)
+- **Az admin itt tudja kezelni a rendeléseket**:
+- Az admin engedélyezni tudja a rendelést vagy pedig elutasítani
+- Miután az admin sikeresen engedélyezte akkor a vásárló a megadott email címre kap egy üzenetet
+
+![Rendelések]()
