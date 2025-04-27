@@ -16,7 +16,7 @@ Az oldalt itt tudod elérni --> https://soundwave2.netlify.app/index.html
 
 ## `Index.html` 
 - **Itt betudsz lépni és regisztrálni:**:
-![Index](https://snipboard.io/tqmPST.jpg)
+![Index](https://snipboard.io/yJcEtL.jpg)
 
 
 ### Home az az a fő oldal amiről több különböző oldalra tudunk navigálni:
@@ -33,6 +33,10 @@ Az oldalt itt tudod elérni --> https://soundwave2.netlify.app/index.html
 ![Asztali nézet](https://snipboard.io/zCYJoe.jpg)
 ![Telefonos Nézet](https://snipboard.io/rWJfjQ.jpg)
 
+![Kategóriák](https://snipboard.io/f2Ajcp.jpg)
+
+![KategóriákMikofon](https://snipboard.io/49vQcw.jpg)
+
 A látogatók számára elérhető főoldal, ahol megjelennek az elérhető termékek
 
 
@@ -41,24 +45,22 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
     - Név, email és jelszó
  
       
-![Regisztráció](https://snipboard.io/IrgKVk.jpg)
-![Bejelentkezés](https://snipboard.io/47dqKP.jpg)
+![Regisztráció](https://snipboard.io/olzKeH.jpg)
+![Bejelentkezés](https://snipboard.io/cKqOMn.jpg)
 
 ## `Profile.html` (Profil) 
 - **Regisztrált felhasználók számára**:
     - Név, és jelszó megváltoztatása
+    - Láthatod az eddigi rendeléseidet
  
-      ![Profil](https://snipboard.io/eXnjPp.jpg)
+      ![Profil](https://snipboard.io/C3cQfB.jpg)
 
-## `Kategoria.html` (Kategóriák) 
-- **Három kategória között tudsz választani**:
-![Kategóriák]()
 
 ## `Cart.html` (Kosár) 
 - **A kiválasztott termékek összegzése**:
    - Itt ha akarod a terméket töbször is hozzá tudod adni
    - Törölni is tudod a termékeket
-  ![Kosár]()
+  ![Kosár](https://snipboard.io/mxTN94.jpg)
 
 ## `Checkout.html` (Pénztár)
     -Irányítószám
@@ -66,7 +68,7 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
     -Utca
     -Fizetési mód
     -Telefonszám
-![Pénztár](https://snipboard.io/nBozeX.jpg)
+![Pénztár](https://snipboard.io/y7R4q9.jpg)
 
 ## `Admin.html` (Admin)
 - **Az admin felület**:
@@ -75,7 +77,7 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
 - Termék leírások és képek módosítása
 - Új termék és Kategória hozzáadása
 
-![Admin]()
+![Admin](https://snipboard.io/EcdPV6.jpg)
 
 
 ## `AdminOrders.html` (Rendelések)
@@ -83,4 +85,10 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
 - Az admin engedélyezni tudja a rendelést vagy pedig elutasítani
 - Miután az admin sikeresen engedélyezte akkor a vásárló a megadott email címre kap egy üzenetet
 
-![Rendelések]()
+![Rendelések](https://snipboard.io/kDSw9N.jpg)
+
+
+## `Teszt.html` (Átnevezni valamire a teszt helyett)
+- **Itt tudod megnézni a termék leírását és információit**:
+
+![Teszt](https://snipboard.io/5LiMHo.jpg)
