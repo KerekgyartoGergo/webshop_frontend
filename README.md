@@ -92,3 +92,15 @@ A látogatók számára elérhető főoldal, ahol megjelennek az elérhető term
 - **Itt tudod megnézni a termék leírását és információit**:
 
 ![Teszt](https://snipboard.io/5LiMHo.jpg)
+
+
+
+## teszt felhasználók 
+
+## admin
+- **Email: adminteszt@gmail.com**
+- **Jelszó: 123456**
+
+## user
+- **Email: teszt@gmail.com**
+- **Jelszó: 123456**
